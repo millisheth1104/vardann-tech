@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
   useScroll,
@@ -51,8 +51,13 @@ export const timelineSteps: TimelineStep[] = [
   },
 ];
 
+const PATH_DATA =
+  "M 235,0 L 235,320 A 145 145 0 0 0 380 465 L 620,465 A 145 145 0 0 1 620 755 L 380,755 A 145 145 0 0 0 380 1045 L 620,1045 A 145 145 0 0 1 765 1190 L 765,1500";
+
 export default function SerpentineTimeline() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const truckRef = useRef<SVGGElement>(null);
 
   // Scroll progress for frame-by-frame path animation
   const { scrollYProgress } = useScroll({
@@ -60,12 +65,45 @@ export default function SerpentineTimeline() {
     offset: ["start 60%", "end 85%"],
   });
 
-  // Smooth spring physics for path drawing
+  // Smooth spring physics for path drawing and vehicle motion
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 85,
     damping: 22,
     restDelta: 0.001,
   });
+
+  // Dynamically translate & rotate the mini truck along the SVG path tangent
+  useEffect(() => {
+    const path = pathRef.current;
+    const truck = truckRef.current;
+    if (!path || !truck) return;
+
+    const totalLength = path.getTotalLength();
+
+    const updateTruckPosition = (progress: number) => {
+      const clamped = Math.max(0, Math.min(1, progress));
+      const currentLength = clamped * totalLength;
+      const pt = path.getPointAtLength(currentLength);
+
+      // Sample a small delta ahead & behind to calculate precise tangent angle
+      const delta = 2;
+      const ptAhead = path.getPointAtLength(Math.min(totalLength, currentLength + delta));
+      const ptBehind = path.getPointAtLength(Math.max(0, currentLength - delta));
+      const angle =
+        Math.atan2(ptAhead.y - ptBehind.y, ptAhead.x - ptBehind.x) * (180 / Math.PI);
+
+      truck.setAttribute("transform", `translate(${pt.x}, ${pt.y}) rotate(${angle})`);
+      truck.style.opacity = clamped > 0.005 ? "1" : "0";
+    };
+
+    updateTruckPosition(smoothProgress.get());
+
+    const unsubscribe = smoothProgress.on("change", (latest) => {
+      updateTruckPosition(latest);
+    });
+
+    return () => unsubscribe();
+  }, [smoothProgress]);
 
   return (
     <section
@@ -81,37 +119,149 @@ export default function SerpentineTimeline() {
           </h2>
         </div>
 
-        {/* Desktop View: Exact Concentric Serpentine SVG Path & 230px Red Circles.
-            The wrapper's aspect ratio is locked to the SVG viewBox (1000x1500)
-            so the path and the absolutely-positioned circles always share the
-            same coordinate space — without this, the SVG scales to whatever
-            the section's actual content width is (~944px, from max-w-5xl minus
-            padding) while raw-pixel circle positions stay unscaled, drifting
-            the circles off the curve. */}
-        <div className="relative hidden lg:block aspect-[1000/1500] w-full">
-          {/* Continuous Serpentine Line SVG */}
+        {/* Unified Responsive Serpentine Roadmap & Moving Truck for Mobile & Desktop */}
+        <div className="relative aspect-[1000/1500] w-full">
+          {/* Continuous Serpentine Road & Moving Truck SVG */}
           <svg
             className="pointer-events-none absolute top-0 left-0 h-full w-full overflow-visible"
             viewBox="0 0 1000 1500"
             fill="none"
           >
-            {/* Background Light Guide Track */}
+            <defs>
+              {/* Headlight beam radial/linear gradient */}
+              <linearGradient id="headlight-beam" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#fef08a" stopOpacity="0.75" />
+                <stop offset="35%" stopColor="#fef08a" stopOpacity="0.25" />
+                <stop offset="100%" stopColor="#fef08a" stopOpacity="0" />
+              </linearGradient>
+              {/* Subtle road elevation shadow */}
+              <filter id="road-elevation" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#0f172a" floodOpacity="0.2" />
+              </filter>
+              {/* Synchronized Scroll Reveal Mask for Road & Dashes */}
+              <mask id="road-reveal-mask">
+                <motion.path
+                  d={PATH_DATA}
+                  stroke="#ffffff"
+                  strokeWidth="36"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                  style={{ pathLength: smoothProgress }}
+                />
+              </mask>
+            </defs>
+
+            {/* Invisible Reference Path for point/tangent measurements */}
             <path
-              d="M 235,0 L 235,320 A 145 145 0 0 0 380 465 L 620,465 A 145 145 0 0 1 620 755 L 380,755 A 145 145 0 0 0 380 1045 L 620,1045 A 145 145 0 0 1 620 1335 L 620,1500"
-              stroke="rgba(248, 192, 40, 0.25)"
-              strokeWidth="4.5"
+              ref={pathRef}
+              d={PATH_DATA}
+              fill="none"
+              stroke="transparent"
+            />
+
+            {/* 1. Subtle background track outline (faint blueprint guide) */}
+            <path
+              d={PATH_DATA}
+              stroke="rgba(0, 80, 160, 0.07)"
+              strokeWidth="2"
+              strokeDasharray="6 8"
               fill="none"
             />
 
-            {/* Frame-by-Frame Travelling Animated Line */}
-            <motion.path
-              d="M 235,0 L 235,320 A 145 145 0 0 0 380 465 L 620,465 A 145 145 0 0 1 620 755 L 380,755 A 145 145 0 0 0 380 1045 L 620,1045 A 145 145 0 0 1 620 1335 L 620,1500"
-              stroke="#f8c028"
-              strokeWidth="5.5"
-              strokeLinecap="round"
-              fill="none"
-              style={{ pathLength: smoothProgress }}
-            />
+            {/* 2. Paved Road & Broken Yellow Dashes (--- --- ---) revealed by mask */}
+            <g mask="url(#road-reveal-mask)">
+              {/* Road Curb / Shadow Outer Border */}
+              <path
+                d={PATH_DATA}
+                stroke="#0f172a"
+                strokeWidth="18"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+                filter="url(#road-elevation)"
+              />
+
+              {/* Asphalt Road Surface */}
+              <path
+                d={PATH_DATA}
+                stroke="#334155"
+                strokeWidth="14"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+
+              {/* Broken Yellow Dashes Centerline */}
+              <path
+                d={PATH_DATA}
+                stroke="#f8c028"
+                strokeWidth="2.5"
+                strokeDasharray="14 14"
+                strokeLinecap="round"
+                fill="none"
+              />
+            </g>
+
+            {/* 5. Miniature Animated Inspection Truck (Driving at leading edge of road) */}
+            <g
+              ref={truckRef}
+              style={{ opacity: 0, transition: "opacity 0.2s ease-out" }}
+              className="pointer-events-none"
+            >
+              {/* Soft Drop Shadow under truck */}
+              <ellipse cx="0" cy="0" rx="16" ry="9" fill="rgba(0,0,0,0.45)" filter="blur(2px)" />
+
+              {/* Headlight beam casting light forward */}
+              <polygon
+                points="13,-4 42,-14 42,14 13,4"
+                fill="url(#headlight-beam)"
+              />
+
+              {/* Wheels (4 Black rubber tires) */}
+              <rect x="-10" y="-8.5" width="5" height="2.5" rx="1" fill="#0f172a" />
+              <rect x="-10" y="6" width="5" height="2.5" rx="1" fill="#0f172a" />
+              <rect x="5" y="-8.5" width="5" height="2.5" rx="1" fill="#0f172a" />
+              <rect x="5" y="6" width="5" height="2.5" rx="1" fill="#0f172a" />
+
+              {/* Main Truck Chassis */}
+              <rect x="-12" y="-6.5" width="24" height="13" rx="2" fill="#1e293b" />
+
+              {/* Rear Cargo Container (Vardann Tech Navy/Blue) */}
+              <rect x="-12" y="-6" width="15" height="12" rx="1.5" fill="#0050a0" />
+              <line x1="-9" y1="-5" x2="-9" y2="5" stroke="#003b78" strokeWidth="0.8" />
+              <line x1="-5" y1="-5" x2="-5" y2="5" stroke="#003b78" strokeWidth="0.8" />
+              <line x1="-1" y1="-5" x2="-1" y2="5" stroke="#003b78" strokeWidth="0.8" />
+              
+              {/* Gold Accent Stripe on Container */}
+              <rect x="-11.5" y="-1" width="13.5" height="2" fill="#f8c028" rx="0.4" />
+
+              {/* Front Driver Cabin (Clean White) */}
+              <path
+                d="M 3 -6 L 10.5 -5 C 12 -4.5, 13 -2.5, 13 0 C 13 2.5, 12 4.5, 10.5 5 L 3 6 Z"
+                fill="#ffffff"
+              />
+              
+              {/* Windshield (Sky Blue Glass) */}
+              <path
+                d="M 4 -4.5 L 8.5 -3.8 C 9.5 -3, 10 -1, 10 0 C 10 1, 9.5 3, 8.5 3.8 L 4 4.5 Z"
+                fill="#38bdf8"
+              />
+              {/* Windshield glare highlight */}
+              <line x1="5.5" y1="-2.5" x2="7.5" y2="0.5" stroke="#ffffff" strokeWidth="0.8" strokeLinecap="round" opacity="0.85" />
+
+              {/* Side Mirrors */}
+              <rect x="5.5" y="-8" width="1.5" height="2" rx="0.8" fill="#0f172a" />
+              <rect x="5.5" y="6" width="1.5" height="2" rx="0.8" fill="#0f172a" />
+
+              {/* Dual Front Headlights (Warm Glow) */}
+              <circle cx="12" cy="-3" r="1.1" fill="#fef08a" />
+              <circle cx="12" cy="3" r="1.1" fill="#fef08a" />
+              
+              {/* Rear Taillights (Red) */}
+              <rect x="-12.5" y="-5" width="0.8" height="2" rx="0.4" fill="#ef4444" />
+              <rect x="-12.5" y="3" width="0.8" height="2" rx="0.4" fill="#ef4444" />
+            </g>
           </svg>
 
           {/* Step 01: Circle Left (Center X=380, Y=320), Text Right */}
@@ -151,34 +301,8 @@ export default function SerpentineTimeline() {
             circleY={1190}
             isCircleLeft={false}
             smoothProgress={smoothProgress}
-            threshold={0.88}
+            threshold={0.86}
           />
-        </div>
-
-        {/* Mobile View Layout (Large Solid Red Circles & Clean Text, No Boxes) */}
-        <div className="relative space-y-16 lg:hidden">
-          {timelineSteps.map((step) => (
-            <div key={step.number} className="flex flex-col items-center text-center">
-              {/* Solid Red Circle */}
-              <div className="flex h-36 w-36 sm:h-44 sm:w-44 items-center justify-center rounded-full bg-vblue shadow-[0_18px_40px_rgba(0,80,160,0.35)] text-white">
-                <span className="font-mono text-2xl sm:text-3xl font-black">{step.year}</span>
-              </div>
-              
-              {/* Pure Typography */}
-              <div className="mt-6">
-                <div className="flex items-center justify-center gap-2">
-                  <span className="font-mono text-2xl font-black text-navy">{step.number}</span>
-                  <h3 className="font-display text-xl text-navy">{step.title}</h3>
-                </div>
-                <p className="mt-2 text-xs font-bold uppercase tracking-widest text-vblue">
-                  {step.year} — {step.subtitle}
-                </p>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-body">
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -232,9 +356,9 @@ function DesktopStepRow({
       className="absolute w-full"
       style={{ top: pctY(circleY - r), height: pctY(1500) }}
     >
-      {/* 1. Large 230px Solid Red Circle (Matching Reference Image) */}
+      {/* 1. Milestone Year Circle (Proportionately scaled) */}
       <motion.div
-        className="absolute rounded-full bg-vblue shadow-[0_18px_40px_rgba(0,87,164,0.35)] flex items-center justify-center text-white"
+        className="absolute rounded-full bg-vblue shadow-[0_8px_20px_rgba(0,87,164,0.25)] sm:shadow-[0_18px_40px_rgba(0,87,164,0.35)] flex items-center justify-center text-white"
         style={{
           left: pctX(circleX - r),
           width: pctX(circleSize),
@@ -243,40 +367,40 @@ function DesktopStepRow({
           opacity: opacity,
         }}
       >
-        <span className="font-mono text-4xl font-black text-white/95 tracking-tight">
+        <span className="font-mono text-xs sm:text-xl md:text-3xl lg:text-4xl font-black text-white/95 tracking-tight">
           {step.year}
         </span>
       </motion.div>
 
-      {/* 2. Pure Typography Text (NO BOXES / NO CARDS - Matching Reference Image) */}
+      {/* 2. Pure Typography Text (Responsive alignment & text sizes) */}
       <motion.div
-        className="absolute max-w-[420px]"
+        className="absolute w-[44%] sm:w-[42%] max-w-[420px]"
         style={{
-          top: pctY(50),
-          left: isCircleLeft ? pctX(540) : "auto",
-          right: isCircleLeft ? "auto" : pctX(540),
+          top: pctY(25),
+          left: isCircleLeft ? pctX(535) : "auto",
+          right: isCircleLeft ? "auto" : pctX(535),
           textAlign: isCircleLeft ? "left" : "right",
           opacity: opacity,
           x: textX,
         }}
       >
         {/* Step Number + Title */}
-        <div className={`flex items-baseline gap-3 ${isCircleLeft ? "" : "justify-end"}`}>
-          <span className="font-mono text-2xl font-black text-navy">
+        <div className={`flex items-baseline gap-1 sm:gap-2 lg:gap-3 ${isCircleLeft ? "" : "justify-end"}`}>
+          <span className="font-mono text-[0.8rem] sm:text-base md:text-xl lg:text-2xl font-black text-navy">
             {step.number}
           </span>
-          <h3 className="font-display text-2xl text-navy tracking-tight">
+          <h3 className="font-display text-[0.82rem] sm:text-base md:text-xl lg:text-2xl text-navy tracking-tight leading-snug">
             {step.title}
           </h3>
         </div>
 
         {/* Subtitle */}
-        <p className="mt-1 text-[0.68rem] font-bold uppercase tracking-widest text-vblue">
+        <p className="mt-0.5 sm:mt-1 text-[0.52rem] sm:text-[0.58rem] md:text-[0.65rem] lg:text-[0.68rem] font-bold uppercase tracking-wider sm:tracking-widest text-vblue">
           {step.subtitle}
         </p>
 
         {/* Description Text */}
-        <p className="mt-3 text-sm leading-relaxed text-body">
+        <p className="mt-0.5 sm:mt-2 lg:mt-3 text-[0.62rem] sm:text-xs md:text-sm leading-tight sm:leading-relaxed text-body">
           {step.description}
         </p>
       </motion.div>

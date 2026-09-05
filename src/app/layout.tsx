@@ -3,6 +3,7 @@ import { Lato, Poppins, Russo_One } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
+import BrochureFloatingButton from "@/components/layout/BrochureFloatingButton";
 import "./globals.css";
 
 // Typography system: Russo One for headings (the same face as the logo's
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <BrochureFloatingButton />
       </body>
     </html>
   );

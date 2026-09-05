@@ -15,20 +15,12 @@ export default function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
 
-  // The trigger link and the mega menu panel are not the same DOM subtree
-  // (the panel is a fixed-position sibling further down the page), so a
-  // plain onMouseLeave on the trigger closes the menu the instant the
-  // cursor moves toward it — before it ever reaches the panel. A short
-  // close delay, cancelled if the cursor lands on either the trigger or
-  // the panel, bridges that gap (the standard mega-menu hover pattern).
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Opens on hover/focus and stays open until Escape, a route change, an
+  // item click, or a backdrop click — there is deliberately no
+  // close-on-mouseleave, since the trigger and the panel aren't in the same
+  // DOM subtree and a leave-based close fought the gap between them.
   const openServices = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
     setServicesOpen(true);
-  };
-  const scheduleCloseServices = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setServicesOpen(false), 350);
   };
 
   // Close the mega menu / mobile panel on route change — adjusted during
@@ -58,10 +50,9 @@ export default function Navbar() {
       {/* z-50 is load-bearing: the mega menu's full-screen backdrop is a
           `fixed inset-0 z-40` sibling rendered inside this same header
           (a z-50 stacking context), so without an explicit z-index here the
-          pill's z-auto loses to it. The backdrop would then paint over the
-          Services trigger the moment the menu opened, re-hit-test the
-          cursor onto itself, fire mouseleave on the trigger and close the
-          menu ~350ms later — the menu flashing open then vanishing. */}
+          pill's z-auto loses to it and the backdrop paints over the whole
+          nav bar whenever the menu is open — swallowing hover states and
+          clicks on the logo and every nav link. */}
       <div className="relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border border-vblue/10 bg-white/95 px-4 py-2 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-14px_rgba(0,87,164,0.25),0_10px_25px_-10px_rgba(15,35,60,0.15)] backdrop-blur-xl sm:px-6 sm:py-2.5 lg:px-8">
         <Link href="/" onClick={() => setOpen(false)}>
           <Logo variant="light" />
@@ -75,17 +66,18 @@ export default function Navbar() {
 
             if (isServices) {
               return (
-                <div
-                  key={link.href}
-                  className="relative"
-                  onMouseEnter={openServices}
-                  onMouseLeave={scheduleCloseServices}
-                >
+                <div key={link.href} onMouseEnter={openServices}>
                   <Link
                     href={link.href}
                     aria-haspopup="menu"
                     aria-expanded={servicesOpen}
                     onFocus={openServices}
+                    onClick={(e) => {
+                      // If clicked on desktop, toggle services menu without forcing navigation
+                      if (!servicesOpen) {
+                        setServicesOpen(true);
+                      }
+                    }}
                     className={`text-eyebrow relative flex items-center gap-1 rounded-full px-4 py-2 text-[0.68rem] transition-colors duration-300 ${
                       active || servicesOpen
                         ? "bg-lightblue text-vblue"
@@ -97,15 +89,6 @@ export default function Navbar() {
                       className={`h-3 w-3 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
                     />
                   </Link>
-                  {/* Hover bridge: the trigger's bottom edge and the panel's
-                      hittable top edge are separated by the pill's own
-                      padding, so a straight cursor path down to the menu
-                      leaves both and starts the close timer. This spans that
-                      gap as a child of the wrapper, so the wrapper never
-                      sees a mouseleave mid-traverse. */}
-                  {servicesOpen && (
-                    <span aria-hidden="true" className="absolute -inset-x-2 top-full h-6" />
-                  )}
                 </div>
               );
             }
@@ -146,8 +129,6 @@ export default function Navbar() {
       <ImmersiveMegaMenu
         open={servicesOpen}
         onClose={() => setServicesOpen(false)}
-        onMouseEnter={openServices}
-        onMouseLeave={scheduleCloseServices}
       />
 
       {open && (
