@@ -76,7 +76,7 @@ export default function SerpentineTimeline() {
         {/* Section Heading */}
         <div className="mx-auto max-w-2xl text-center mb-10">
           <p className="text-eyebrow text-[0.72rem] text-vblue">Company Roadmap</p>
-          <h2 className="mt-2 font-display text-3xl leading-[1.08] tracking-tight text-navy sm:text-5xl">
+          <h2 className="mt-2 font-display text-3xl leading-[1.08] tracking-tight text-navy sm:text-[2.9rem]">
             Project Steps & <span className="text-vblue italic">Milestones.</span>
           </h2>
         </div>
@@ -168,7 +168,7 @@ export default function SerpentineTimeline() {
               <div className="mt-6">
                 <div className="flex items-center justify-center gap-2">
                   <span className="font-mono text-2xl font-black text-navy">{step.number}</span>
-                  <h3 className="font-display text-xl font-bold text-navy">{step.title}</h3>
+                  <h3 className="font-display text-xl text-navy">{step.title}</h3>
                 </div>
                 <p className="mt-2 text-xs font-bold uppercase tracking-widest text-vblue">
                   {step.year} — {step.subtitle}
@@ -265,7 +265,7 @@ function DesktopStepRow({
           <span className="font-mono text-2xl font-black text-navy">
             {step.number}
           </span>
-          <h3 className="font-display text-2xl font-bold text-navy tracking-tight">
+          <h3 className="font-display text-2xl text-navy tracking-tight">
             {step.title}
           </h3>
         </div>

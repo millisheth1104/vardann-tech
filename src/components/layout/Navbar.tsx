@@ -55,7 +55,14 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-5">
-      <div className="relative mx-auto flex max-w-6xl items-center justify-between rounded-full border border-vblue/10 bg-white/95 px-4 py-2 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-14px_rgba(0,87,164,0.25),0_10px_25px_-10px_rgba(15,35,60,0.15)] backdrop-blur-xl sm:px-6 sm:py-2.5 lg:px-8">
+      {/* z-50 is load-bearing: the mega menu's full-screen backdrop is a
+          `fixed inset-0 z-40` sibling rendered inside this same header
+          (a z-50 stacking context), so without an explicit z-index here the
+          pill's z-auto loses to it. The backdrop would then paint over the
+          Services trigger the moment the menu opened, re-hit-test the
+          cursor onto itself, fire mouseleave on the trigger and close the
+          menu ~350ms later — the menu flashing open then vanishing. */}
+      <div className="relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border border-vblue/10 bg-white/95 px-4 py-2 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-14px_rgba(0,87,164,0.25),0_10px_25px_-10px_rgba(15,35,60,0.15)] backdrop-blur-xl sm:px-6 sm:py-2.5 lg:px-8">
         <Link href="/" onClick={() => setOpen(false)}>
           <Logo variant="light" />
         </Link>
@@ -68,7 +75,12 @@ export default function Navbar() {
 
             if (isServices) {
               return (
-                <div key={link.href} onMouseEnter={openServices} onMouseLeave={scheduleCloseServices}>
+                <div
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={openServices}
+                  onMouseLeave={scheduleCloseServices}
+                >
                   <Link
                     href={link.href}
                     aria-haspopup="menu"
@@ -85,6 +97,15 @@ export default function Navbar() {
                       className={`h-3 w-3 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
                     />
                   </Link>
+                  {/* Hover bridge: the trigger's bottom edge and the panel's
+                      hittable top edge are separated by the pill's own
+                      padding, so a straight cursor path down to the menu
+                      leaves both and starts the close timer. This spans that
+                      gap as a child of the wrapper, so the wrapper never
+                      sees a mouseleave mid-traverse. */}
+                  {servicesOpen && (
+                    <span aria-hidden="true" className="absolute -inset-x-2 top-full h-6" />
+                  )}
                 </div>
               );
             }

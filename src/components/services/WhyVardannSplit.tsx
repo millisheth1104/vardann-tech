@@ -22,7 +22,7 @@ export default function WhyVardannSplit() {
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
               Why Vardann Tech
             </span>
-            <h2 className="mt-5 font-display text-4xl leading-[1.05] tracking-tight text-navy sm:text-5xl">
+            <h2 className="mt-5 font-display text-[2.15rem] leading-[1.05] tracking-tight text-navy sm:text-[2.9rem]">
               Zero Compromise.
               <br />
               <span className="text-vblue">Towards Safety.</span>

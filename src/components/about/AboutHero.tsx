@@ -33,7 +33,7 @@ export default function AboutHero() {
             About Us
           </span>
 
-          <h1 className="mt-5 font-display text-5xl leading-[1.05] tracking-tight text-navy sm:text-6xl">
+          <h1 className="mt-5 font-display text-[2.9rem] leading-[1.05] tracking-tight text-navy sm:text-[3.6rem]">
             Company Profile.
           </h1>
 

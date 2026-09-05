@@ -36,7 +36,7 @@ export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps
         </motion.p>
         <motion.h1
           variants={fadeUp}
-          className="mx-auto mt-4 max-w-2xl font-display text-5xl tracking-tight text-navy sm:text-6xl"
+          className="mx-auto mt-4 max-w-2xl font-display text-[2.9rem] tracking-tight text-navy sm:text-[3.6rem]"
         >
           {title}
         </motion.h1>

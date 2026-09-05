@@ -33,7 +33,7 @@ export default function Hero() {
         <p className="text-eyebrow text-[0.7rem] text-vblue">
           NDT &middot; Inspection &middot; Metallography &middot; Manufacturing
         </p>
-        <h1 className="mx-auto mt-4 max-w-3xl font-display text-[2.6rem] leading-[1] tracking-tight text-navy sm:text-6xl lg:text-7xl">
+        <h1 className="mx-auto mt-4 max-w-3xl font-display text-[2.5rem] leading-[1] tracking-tight text-navy sm:text-[3.6rem] lg:text-[4.3rem]">
           Engineered for <span className="text-vblue italic">the Critical.</span>
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-body sm:text-lg">

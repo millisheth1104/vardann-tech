@@ -20,7 +20,7 @@ export default function ServicesPage() {
 
       <section className="border-t border-vblue/10 bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
-          <h2 className="font-display text-4xl tracking-tight text-navy sm:text-5xl">
+          <h2 className="font-display text-[2.15rem] tracking-tight text-navy sm:text-[2.9rem]">
             <TextReveal text="One standard of" />
             {" "}
             <TextReveal text="precision." delay={0.25} className="text-vblue italic" />

@@ -81,7 +81,7 @@ export default function ServiceHero({
             {subtitle}
           </motion.p>
 
-          <p className="mt-5 font-display text-[2.4rem] leading-[1.05] tracking-tight text-navy sm:text-6xl">
+          <p className="mt-5 font-display text-[2.3rem] leading-[1.05] tracking-tight text-navy sm:text-[3.6rem]">
             <TextReveal text={headlineRest} trigger="mount" delay={0.35} />
             {" "}
             <TextReveal

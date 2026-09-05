@@ -53,7 +53,7 @@ export default function AboutPage() {
           the usual Contact Us CTA kept underneath. */}
       <CtaSection
         heading={<span className="italic">&ldquo;{company.quote}&rdquo;</span>}
-        headingClassName="text-3xl sm:text-4xl leading-snug"
+        headingClassName="text-3xl sm:text-[2.15rem] leading-snug"
         subtitle={<span className="text-eyebrow text-gold">{company.name}</span>}
       />
     </>

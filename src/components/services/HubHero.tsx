@@ -27,7 +27,7 @@ export default function HubHero() {
         </span>
       </motion.div>
 
-      <h1 className="mx-auto mt-6 max-w-3xl px-6 text-center font-display text-[2.5rem] leading-[1.08] tracking-tight text-navy sm:text-6xl">
+      <h1 className="mx-auto mt-6 max-w-3xl px-6 text-center font-display text-[2.4rem] leading-[1.08] tracking-tight text-navy sm:text-[3.6rem]">
         <TextReveal text="Inspection, Testing &" trigger="mount" delay={0.35} />
         {" "}
         <TextReveal

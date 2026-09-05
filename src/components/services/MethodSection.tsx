@@ -25,7 +25,7 @@ export default function MethodSection({ group }: { group: ServiceMethodGroup }) 
                 className="object-cover"
               />
             </div>
-            <h2 className="mt-6 font-display text-3xl text-navy sm:text-4xl">{group.title}</h2>
+            <h2 className="mt-6 font-display text-3xl text-navy sm:text-[2.15rem]">{group.title}</h2>
             {group.intro && (
               <p className="mt-3 text-lg leading-relaxed text-body">{group.intro}</p>
             )}

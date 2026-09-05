@@ -28,7 +28,7 @@ const DEFAULT_HEADING = (
 
 export default function CtaSection({
   heading = DEFAULT_HEADING,
-  headingClassName = "text-4xl sm:text-6xl",
+  headingClassName = "text-[2.15rem] sm:text-[3.6rem]",
   subtitle = "Talk to our team about your inspection, testing or manufacturing requirements.",
 }: CtaSectionProps = {}) {
   return (

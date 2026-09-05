@@ -64,7 +64,7 @@ export default function CinematicCta({
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <p className="text-eyebrow text-[0.65rem] text-gold">{eyebrow}</p>
-        <h2 className="mt-4 font-display text-4xl leading-[1.1] text-white sm:text-5xl">
+        <h2 className="mt-4 font-display text-[2.15rem] leading-[1.1] text-white sm:text-[2.9rem]">
           {headline}
         </h2>
         <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-white/70">

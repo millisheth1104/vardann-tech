@@ -370,7 +370,7 @@ export default function GlobalGlobe() {
         "background:rgba(255,255,255,0.94)",
         `border:1px solid ${country.isOrigin ? "rgba(248,192,40,0.6)" : "rgba(0,87,164,0.2)"}`,
         "box-shadow:0 3px 10px rgba(15,35,60,0.14)",
-        "font-family:var(--font-instrument-sans, sans-serif)",
+        "font-family:var(--font-lato, sans-serif)",
         "opacity:0",
         "will-change:transform,opacity",
       ].join(";");

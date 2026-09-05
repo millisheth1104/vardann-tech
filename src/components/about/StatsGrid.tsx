@@ -34,7 +34,7 @@ function CounterValue({ targetStr, triggerCount }: { targetStr: string; triggerC
   }, [triggerCount, numVal, isNumeric, hasPlus]);
 
   return (
-    <div className="font-display text-2xl sm:text-3xl font-[950] tracking-[-0.03em] leading-none text-navy">
+    <div className="font-display text-2xl sm:text-3xl leading-none text-navy">
       {isNumeric ? displayValue : targetStr}
     </div>
   );

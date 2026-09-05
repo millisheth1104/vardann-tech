@@ -35,7 +35,7 @@ export default function ManufacturingCapabilities() {
   return (
     <div className="border-t border-vblue/10 py-12 sm:py-16">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
-        <h2 className="font-display text-3xl text-navy sm:text-4xl">
+        <h2 className="font-display text-3xl text-navy sm:text-[2.15rem]">
           Precision Manufacturing & Fabrication
         </h2>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed text-body">

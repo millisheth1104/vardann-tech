@@ -78,7 +78,7 @@ function DeckCard({
         <span className="text-eyebrow text-[0.65rem] text-gold">
           Step {card.number} / 06
         </span>
-        <h3 className="mt-3 font-display text-3xl text-white sm:text-5xl">
+        <h3 className="mt-3 font-display text-3xl text-white sm:text-[2.9rem]">
           {card.title}
         </h3>
         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -183,7 +183,7 @@ export default function ServiceDeck() {
         <div className="mx-auto grid w-full max-w-6xl items-center gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <p className="text-eyebrow text-[0.72rem] text-vblue">Services / 01</p>
-            <h2 className="mt-2 font-display text-3xl leading-[1.08] tracking-tight text-navy sm:text-5xl">
+            <h2 className="mt-2 font-display text-3xl leading-[1.08] tracking-tight text-navy sm:text-[2.9rem]">
               What Vardann <span className="text-vblue italic">Does.</span>
             </h2>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-body sm:mt-4 sm:text-base">
