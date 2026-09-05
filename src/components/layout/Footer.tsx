@@ -65,6 +65,9 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {company.name}. All rights reserved.
           </p>
+          <p>
+            Designed by <span className="text-white/70">The Pure Studio</span>
+          </p>
           <p className="text-eyebrow text-[0.62rem] text-white/50">
             {company.tagline}
           </p>

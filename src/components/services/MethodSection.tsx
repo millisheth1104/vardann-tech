@@ -12,7 +12,7 @@ export default function MethodSection({ group }: { group: ServiceMethodGroup }) 
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="border-t border-vblue/10 py-12 sm:py-16">
+    <div className="section-divider py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[0.42fr_0.58fr] lg:gap-14">
           <div className="lg:sticky lg:top-28 lg:self-start">

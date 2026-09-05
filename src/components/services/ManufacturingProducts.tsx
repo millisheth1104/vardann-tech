@@ -11,7 +11,7 @@ export default function ManufacturingProducts() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="border-t border-vblue/10 py-14 sm:py-16">
+    <div className="section-divider py-14 sm:py-16">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <p className="text-eyebrow text-[0.68rem] text-vblue">What We Manufacture</p>
 

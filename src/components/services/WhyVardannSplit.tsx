@@ -14,7 +14,7 @@ export default function WhyVardannSplit() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="border-t border-vblue/10 bg-continuous-light py-12 sm:py-16">
+    <section className="section-divider bg-continuous-light py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-6 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>

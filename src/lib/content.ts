@@ -197,6 +197,84 @@ export type Product = {
   image: string;
 };
 
+export type CountryData = {
+  id: string;
+  name: string;
+  /** Short label for the on-globe tag chip — falls back to `name`. */
+  short?: string;
+  /** ISO alpha-2 code, shown as a small badge on the tag chip instead of a
+   *  flag emoji — regional-indicator flag glyphs don't render as flags on
+   *  Windows/Chrome (they show as bare letters, e.g. "IQ"). */
+  code: string;
+  flag: string;
+  lat: number;
+  lon: number;
+  capital: string;
+  isOrigin?: boolean;
+};
+
+// Single source of truth for the served-markets list. Lives here rather
+// than inside a globe component because three separate copies had drifted
+// apart (GlobalGlobe / DottedWorldMap / HalfGlobe each had their own), so
+// the globe and the region pills beside it disagreed about which countries
+// the company actually serves.
+export const originCountry: CountryData = {
+  id: "india",
+  name: "India",
+  code: "IN",
+  flag: "🇮🇳",
+  lat: 20.5937,
+  lon: 78.9629,
+  capital: "New Delhi",
+  isOrigin: true,
+};
+
+export const destinationCountries: CountryData[] = [
+  { id: "kuwait", name: "Kuwait", code: "KW", flag: "🇰🇼", lat: 29.3759, lon: 47.9774, capital: "Kuwait City" },
+  { id: "saudi_arabia", name: "Saudi Arabia", code: "SA", flag: "🇸🇦", lat: 23.8859, lon: 45.0792, capital: "Riyadh" },
+  { id: "qatar", name: "Qatar", code: "QA", flag: "🇶🇦", lat: 25.3548, lon: 51.1839, capital: "Doha" },
+  { id: "iran", name: "Iran", code: "IR", flag: "🇮🇷", lat: 32.4279, lon: 53.688, capital: "Tehran" },
+  { id: "iraq", name: "Iraq", code: "IQ", flag: "🇮🇶", lat: 33.2232, lon: 43.6793, capital: "Baghdad" },
+  { id: "uae", name: "United Arab Emirates", short: "UAE", code: "AE", flag: "🇦🇪", lat: 23.4241, lon: 53.8478, capital: "Abu Dhabi" },
+  { id: "thailand", name: "Thailand", code: "TH", flag: "🇹🇭", lat: 15.87, lon: 100.9925, capital: "Bangkok" },
+  { id: "indonesia", name: "Indonesia", code: "ID", flag: "🇮🇩", lat: -0.7893, lon: 113.9213, capital: "Jakarta" },
+  { id: "vietnam", name: "Vietnam", code: "VN", flag: "🇻🇳", lat: 14.0583, lon: 108.2772, capital: "Hanoi" },
+  { id: "australia", name: "Australia", code: "AU", flag: "🇦🇺", lat: -25.2744, lon: 133.7751, capital: "Canberra" },
+  { id: "new_zealand", name: "New Zealand", short: "NZ", code: "NZ", flag: "🇳🇿", lat: -40.9006, lon: 174.886, capital: "Wellington" },
+  { id: "ghana", name: "Ghana", code: "GH", flag: "🇬🇭", lat: 7.9465, lon: -1.0232, capital: "Accra" },
+  { id: "uganda", name: "Uganda", code: "UG", flag: "🇺🇬", lat: 1.3733, lon: 32.2903, capital: "Kampala" },
+  { id: "kenya", name: "Kenya", code: "KE", flag: "🇰🇪", lat: -1.2921, lon: 36.8219, capital: "Nairobi" },
+];
+
+export const allPresenceCountries: CountryData[] = [originCountry, ...destinationCountries];
+
+export type Owner = {
+  name: string;
+  role: string;
+  bio: string;
+  /** Optional headshot in /public. Falls back to an initials avatar. */
+  image?: string;
+};
+
+// ⚠️ PLACEHOLDER DATA — REPLACE BEFORE LAUNCH.
+// Deliberately written as obvious placeholders rather than realistic
+// invented names: this is a real company's public About page, and fake
+// leadership names would misrepresent it if they ever went live. Swap in
+// the real designated partners (name, role, one-line bio, optional
+// headshot path) and this comment can go.
+export const owners: Owner[] = [
+  {
+    name: "Partner Name One",
+    role: "Designated Partner",
+    bio: "Placeholder bio — a short line on this partner's background, discipline and years in NDT engineering.",
+  },
+  {
+    name: "Partner Name Two",
+    role: "Designated Partner",
+    bio: "Placeholder bio — a short line on this partner's background, discipline and years in NDT engineering.",
+  },
+];
+
 export const bestsellerProducts: Product[] = [
   {
     id: "welded-specimen-set",
@@ -532,26 +610,44 @@ export const serviceMeta: ServiceMeta[] = [
     accent: "vblue",
   },
   {
-    id: "destructive-testing-training",
+    id: "destructive-testing",
     number: "03",
-    slug: "destructive-testing-training",
-    title: "Destructive Testing & Training",
-    eyebrow: "PMI · OES · METALLOGRAPHY · ASNT I / II / III",
-    headline: "Understand the material. Build the expertise.",
-    subtitle: "Chemical Analysis · Metallurgical Testing · NDT Training",
+    slug: "destructive-testing",
+    title: "Destructive Testing",
+    eyebrow: "PMI · OES · METALLOGRAPHY",
+    headline: "Understand the material.",
+    subtitle: "Chemical Analysis · Metallurgical Testing",
     intro:
-      "Portable XRF and optical emission analysis confirm material chemistry on site, while our ASNT-aligned training programs build certified, field-ready NDT technicians.",
-    cardDescriptor: "Chemical/metallurgical testing plus certified NDT training",
+      "Portable XRF and optical emission analysis confirm material chemistry on site, and in-situ metallography examines microstructure directly on the component without damaging it.",
+    cardDescriptor: "Chemical & metallurgical testing, on site",
     heroVisualLabel: "In-situ metallography on a weld cross-section",
     heroImage: "/services/destructive-testing-hero.jpg",
-    galleryImage: "/services/hub-gallery-training.jpg",
+    galleryImage: "/services/group-chemical-metallurgical.jpg",
     ctaImage: "/services/destructive-testing-cta.jpg",
     icon: "metallography",
     accent: "gold",
   },
   {
-    id: "manufacturing",
+    id: "training-certification",
     number: "04",
+    slug: "training-certification",
+    title: "Training & Certification",
+    eyebrow: "ASNT LEVEL I · II · III",
+    headline: "Build the expertise.",
+    subtitle: "NDT Level I, II & III Training",
+    intro:
+      "Professional training and certification courses in NDT Level I, II and III as per ASNT standards — theory combined with hands-on practical sessions across PAUT, TOFD, ECT, RFET, IRIS, UT, MT and PT methods.",
+    cardDescriptor: "ASNT-aligned NDT Level I, II & III training",
+    heroVisualLabel: "ASNT-aligned NDT training session",
+    heroImage: "/services/group-training.jpg",
+    galleryImage: "/services/hub-gallery-training.jpg",
+    ctaImage: "/services/group-training.jpg",
+    icon: "training",
+    accent: "gold",
+  },
+  {
+    id: "manufacturing",
+    number: "05",
     slug: "manufacturing",
     title: "Manufacturing",
     eyebrow: "CNC · VMC · EDM · WIRE CUT · FABRICATION",
@@ -755,6 +851,12 @@ export const destructiveTestingGroups: ServiceMethodGroup[] = [
       },
     ],
   },
+];
+
+// Split out of destructiveTestingGroups when Destructive Testing and
+// Training & Certification became two separate services — the brochure
+// already treated them as two distinct sub-sections.
+export const trainingGroups: ServiceMethodGroup[] = [
   {
     title: "Training & Certification",
     intro:

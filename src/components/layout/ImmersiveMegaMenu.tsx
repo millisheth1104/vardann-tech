@@ -110,7 +110,7 @@ export default function ImmersiveMegaMenu({
                       className="absolute inset-0 bg-[linear-gradient(180deg,rgba(44,62,80,0.25),rgba(44,62,80,0.85))]"
                     />
                     <span className="text-eyebrow relative z-10 text-[0.6rem] text-white/45">
-                      {current.number} / 04
+                      {current.number} / {String(serviceMeta.length).padStart(2, "0")}
                     </span>
                     <div className="relative z-10">
                       <h3 className="font-display text-3xl text-white">{current.title}</h3>

@@ -8,7 +8,7 @@ import TextReveal from "@/components/services/TextReveal";
 export const metadata: Metadata = {
   title: "Services | Vardann Tech and Engg LLP",
   description:
-    "Advanced NDT, conventional NDT, destructive testing & training, and precision manufacturing — engineering inspection and fabrication services from Vardann Tech and Engg LLP.",
+    "Advanced NDT, conventional NDT, destructive testing, ASNT-aligned training & certification, and precision manufacturing — engineering inspection and fabrication services from Vardann Tech and Engg LLP.",
 };
 
 export default function ServicesPage() {
@@ -18,7 +18,7 @@ export default function ServicesPage() {
 
       <ServiceGallery />
 
-      <section className="border-t border-vblue/10 bg-white py-12 sm:py-16">
+      <section className="section-divider bg-white/70 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
           <h2 className="font-display text-[2.15rem] tracking-tight text-navy sm:text-[2.9rem]">
             <TextReveal text="One standard of" />

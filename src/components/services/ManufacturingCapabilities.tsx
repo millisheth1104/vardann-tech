@@ -33,7 +33,7 @@ function TagRow({ title, items }: { title: string; items: string[] }) {
 // text-only spec sheet.
 export default function ManufacturingCapabilities() {
   return (
-    <div className="border-t border-vblue/10 py-12 sm:py-16">
+    <div className="section-divider py-12 sm:py-16">
       <div className="mx-auto max-w-5xl px-6 lg:px-10">
         <h2 className="font-display text-3xl text-navy sm:text-[2.15rem]">
           Precision Manufacturing & Fabrication
@@ -65,7 +65,7 @@ export default function ManufacturingCapabilities() {
           <TagRow title="Materials" items={manufacturingContent.materials} />
         </div>
 
-        <div className="mt-10 border-t border-vblue/10 pt-8">
+        <div className="mt-10 section-divider pt-8">
           <p className="text-eyebrow text-[0.62rem] text-vblue">Services</p>
           <ul className="mt-4 flex flex-col gap-2">
             {manufacturingContent.services.map((s) => (

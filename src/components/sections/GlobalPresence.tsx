@@ -1,29 +1,15 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import SectionHeading from "@/components/ui/SectionHeading";
-
-const DottedWorldMap = dynamic(() => import("@/components/sections/DottedWorldMap"), {
-  ssr: false,
-  loading: () => (
-    <div className="relative mx-auto h-[410px] sm:h-[500px] w-full bg-transparent" />
-  ),
-});
-
-const regions = [
-  "India (Origin)",
-  "USA",
-  "Egypt",
-  "Libya",
-  "Iran",
-  "Saudi Arabia",
-  "Russia",
-];
+import { allPresenceCountries } from "@/lib/content";
+import FlatWorldMap from "@/components/sections/FlatWorldMap";
 
 export default function GlobalPresence() {
   return (
-    <section className="relative flex flex-col items-center justify-center px-4 py-16 sm:px-6 sm:py-24 overflow-visible">
-      <div className="relative mx-auto w-full max-w-6xl overflow-visible">
+    // min-h-screen + a vh-capped globe keeps the whole section — heading,
+    // globe and region pills — inside a single viewport height.
+    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-8 sm:px-6">
+      <div className="relative mx-auto w-full max-w-6xl">
         <SectionHeading
           eyebrow="Global Presence"
           title={
@@ -31,25 +17,30 @@ export default function GlobalPresence() {
               Trusted Across <span className="text-vblue italic">Continents.</span>
             </>
           }
-          subtitle="Our products and services are trusted by clients across India, the Middle East, Africa, Eurasia, USA, and Russia."
+          subtitle="Our products and services are trusted by clients across India, the Middle East, Africa and the Asia-Pacific region."
         />
 
-        {/* Clean Map Container without blue background / fog */}
-        <div className="relative mt-8 sm:mt-12 mb-6 sm:mb-10 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[380px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-visible touch-pan-y">
-          <DottedWorldMap />
+        {/* Spans the full container. The map's own 2.42:1 panoramic crop
+            keeps it wide and shallow, so filling the width doesn't make it
+            tall enough to push the region pills off screen — an earlier
+            vh-based width cap left it as a small island in a very wide
+            section. */}
+        <div className="mt-4 w-full sm:mt-6">
+          <FlatWorldMap />
         </div>
 
-        <div className="mx-auto mt-4 sm:mt-6 flex max-w-3xl flex-col items-center gap-3 text-center">
+        <div className="mx-auto mt-5 flex max-w-3xl flex-col items-center gap-2.5 text-center">
           <p className="text-eyebrow text-[0.65rem] text-steel">
             Global Delivery Network &amp; Connected Markets
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-2.5">
-            {regions.map((r) => (
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {allPresenceCountries.map((c) => (
               <span
-                key={r}
-                className="rounded-full border border-vblue/15 bg-white px-4 py-1.5 text-xs font-semibold text-navy shadow-sm sm:text-sm"
+                key={c.id}
+                className="rounded-full border border-vblue/15 bg-white px-3.5 py-1.5 text-xs font-semibold text-navy shadow-sm"
               >
-                {r}
+                {c.short ?? c.name}
+                {c.isOrigin && <span className="ml-1.5 text-[0.6rem] text-vblue">HQ</span>}
               </span>
             ))}
           </div>

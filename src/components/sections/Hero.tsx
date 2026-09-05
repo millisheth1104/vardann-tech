@@ -16,10 +16,6 @@ export default function Hero() {
           plain gradient (see .bg-continuous-light). */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_60%_45%_at_50%_0%,rgba(0,80,160,0.16),transparent_65%)]"
-      />
-      <div
-        aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-90 [background-image:linear-gradient(rgba(0,80,160,0.14)_1px,transparent_1px),linear-gradient(90deg,rgba(0,80,160,0.14)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_35%,black,transparent)]"
       />
 

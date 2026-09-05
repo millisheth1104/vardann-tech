@@ -56,7 +56,7 @@ export default function ImageSlot({
 
   return (
     <motion.div
-      className={`relative overflow-hidden rounded-lg ${
+      className={`relative overflow-hidden rounded-2xl ${
         isDark ? "border border-white/10 bg-navy" : "border border-vblue/12 bg-white"
       } ${className}`}
       initial={

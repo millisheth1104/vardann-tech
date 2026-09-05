@@ -12,7 +12,7 @@ export default function ServiceNav({ currentId }: { currentId: string }) {
   return (
     <nav
       aria-label="Service pages"
-      className="border-t border-vblue/10 py-10"
+      className="section-divider py-10"
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 lg:px-10">
         <Link

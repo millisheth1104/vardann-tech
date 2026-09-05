@@ -15,12 +15,21 @@ export default function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
 
-  // Opens on hover/focus and stays open until Escape, a route change, an
-  // item click, or a backdrop click — there is deliberately no
-  // close-on-mouseleave, since the trigger and the panel aren't in the same
-  // DOM subtree and a leave-based close fought the gap between them.
+  // Hover-only menu: opens on hover/focus, closes when the cursor leaves
+  // both the trigger and the panel. The trigger and the panel aren't in the
+  // same DOM subtree (the panel is a fixed-position sibling), so a plain
+  // onMouseLeave would close it the instant the cursor set off toward the
+  // panel. A short close delay — cancelled by entering either the trigger
+  // or the panel — bridges that, together with the hover bridge span below
+  // that covers the pill's padding between the two.
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
     setServicesOpen(true);
+  };
+  const scheduleCloseServices = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setServicesOpen(false), 260);
   };
 
   // Close the mega menu / mobile panel on route change — adjusted during
@@ -66,18 +75,17 @@ export default function Navbar() {
 
             if (isServices) {
               return (
-                <div key={link.href} onMouseEnter={openServices}>
+                <div
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={openServices}
+                  onMouseLeave={scheduleCloseServices}
+                >
                   <Link
                     href={link.href}
                     aria-haspopup="menu"
                     aria-expanded={servicesOpen}
                     onFocus={openServices}
-                    onClick={(e) => {
-                      // If clicked on desktop, toggle services menu without forcing navigation
-                      if (!servicesOpen) {
-                        setServicesOpen(true);
-                      }
-                    }}
                     className={`text-eyebrow relative flex items-center gap-1 rounded-full px-4 py-2 text-[0.68rem] transition-colors duration-300 ${
                       active || servicesOpen
                         ? "bg-lightblue text-vblue"
@@ -89,6 +97,15 @@ export default function Navbar() {
                       className={`h-3 w-3 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`}
                     />
                   </Link>
+                  {/* Hover bridge: the trigger's bottom edge (~64px) and the
+                      panel's hittable top edge (~84px) are separated by the
+                      nav pill's own padding, so a straight cursor path down
+                      to the menu leaves both and starts the close timer.
+                      This spans that gap as a child of the wrapper, so the
+                      wrapper never sees a mouseleave mid-traverse. */}
+                  {servicesOpen && (
+                    <span aria-hidden="true" className="absolute -inset-x-2 top-full h-6" />
+                  )}
                 </div>
               );
             }
@@ -129,6 +146,8 @@ export default function Navbar() {
       <ImmersiveMegaMenu
         open={servicesOpen}
         onClose={() => setServicesOpen(false)}
+        onMouseEnter={openServices}
+        onMouseLeave={scheduleCloseServices}
       />
 
       {open && (

@@ -6,7 +6,7 @@ import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import ImageSlot from "./ImageSlot";
 import TextReveal from "./TextReveal";
 import Marquee from "./Marquee";
-import type { IconKey } from "@/lib/content";
+import { serviceMeta, type IconKey } from "@/lib/content";
 
 type ServiceHeroProps = {
   number: string;
@@ -50,7 +50,16 @@ export default function ServiceHero({
 
   return (
     <section className="relative overflow-hidden bg-continuous-light">
-      <div className="mx-auto grid max-w-[1600px] items-center gap-10 pt-10 pb-10 lg:grid-cols-[0.62fr_0.88fr] lg:gap-0 lg:pt-14 lg:pb-14">
+      {/* Track sizing is deliberate. `0.62fr 0.88fr` left 73px of the row
+          unallocated (the large single-word display headline inflates the
+          text track past its proportional fr share, and the remainder is
+          never redistributed) which read as the hero image being
+          misplaced. Plain `auto` over-corrects the other way, letting the
+          copy take its full max-content and starving the image. So: cap the
+          text track at 40% but never below its min-content — guaranteeing
+          the headline can't overflow — and let `1fr` absorb everything
+          left, so the image always reaches the right edge. */}
+      <div className="mx-auto grid max-w-[1600px] items-center gap-10 pt-10 pb-10 lg:grid-cols-[minmax(min-content,40%)_1fr] lg:gap-0 lg:pt-14 lg:pb-14">
         <div className="px-6 lg:px-14">
           <motion.div
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
@@ -59,7 +68,7 @@ export default function ServiceHero({
           >
             <span className="text-eyebrow inline-flex items-center gap-2 rounded-full border border-vblue/25 bg-white px-3.5 py-1.5 text-[0.62rem] text-vblue">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-              {number} / 04
+              {number} / {String(serviceMeta.length).padStart(2, "0")}
             </span>
           </motion.div>
 
@@ -108,19 +117,23 @@ export default function ServiceHero({
           </motion.div>
         </div>
 
-        <div className="relative">
+        {/* Inset rather than bled to the container edge: the image column
+            carries its own horizontal padding and is rounded on all four
+            corners, so it reads as a framed panel instead of a photo
+            running off the side of the page. */}
+        <div className="relative px-6 lg:pr-14 lg:pl-6">
           <ImageSlot
             label={visualLabel}
             icon={icon}
             image={image}
             priority
-            className="h-[46vh] rounded-none lg:h-[34rem] lg:rounded-l-2xl"
+            className="h-[46vh] lg:h-[34rem]"
             direction="down"
             delay={0.2}
             trigger="mount"
           />
           <motion.div
-            className="absolute bottom-5 left-5 flex items-center gap-2.5 rounded-xl bg-white px-4 py-3 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] sm:bottom-8 sm:left-8"
+            className="absolute bottom-5 left-11 flex items-center gap-2.5 rounded-xl bg-white px-4 py-3 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.3)] sm:bottom-8 lg:left-8"
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
             animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -131,7 +144,7 @@ export default function ServiceHero({
         </div>
       </div>
 
-      <div className="border-t border-vblue/10 bg-white py-5">
+      <div className="section-divider bg-white py-5">
         <Marquee
           items={codes}
           className="[mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]"

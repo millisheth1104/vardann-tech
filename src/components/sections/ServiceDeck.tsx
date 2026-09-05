@@ -22,10 +22,10 @@ const SEGMENT_VH = 70;
 const SERVICE_HREFS: Record<string, string> = {
   "advanced-ndt": "/services/advanced-ndt",
   "conventional-ndt": "/services/conventional-ndt",
-  "inspection-services": "/services/destructive-testing-training",
-  "metallography": "/services/destructive-testing-training",
+  "inspection-services": "/services/destructive-testing",
+  "metallography": "/services/destructive-testing",
   "precision-manufacturing": "/services/manufacturing",
-  "training-certification": "/services/destructive-testing-training",
+  "training-certification": "/services/training-certification",
 };
 
 /* -------------------------------------------------------------------------- */

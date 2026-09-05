@@ -4,58 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
-export interface CountryData {
-  id: string;
-  name: string;
-  /** Short label for the on-globe tag chip — falls back to `name`. */
-  short?: string;
-  /** ISO alpha-2 code, shown as a small badge on the tag chip instead of a
-   *  flag emoji — regional-indicator flag glyphs don't render as flags on
-   *  this Windows/Chrome setup (they showed as bare letters, e.g. "IQ"),
-   *  so a deliberate code badge is more reliable than relying on emoji
-   *  font support. */
-  code: string;
-  flag: string;
-  lat: number;
-  lon: number;
-  capital: string;
-  isOrigin?: boolean;
-}
+// Country data lives in content.ts so the globe and the region pills
+// rendered beside it can't drift apart (they previously did).
+import {
+  originCountry as ORIGIN_COUNTRY,
+  destinationCountries as DESTINATION_COUNTRIES,
+  allPresenceCountries as ALL_COUNTRIES,
+  type CountryData,
+} from "@/lib/content";
 
-export const ORIGIN_COUNTRY: CountryData = {
-  id: "india",
-  name: "India",
-  code: "IN",
-  flag: "🇮🇳",
-  lat: 20.5937,
-  lon: 78.9629,
-  capital: "New Delhi",
-  isOrigin: true,
-};
-
+// Module-level so the decoded texture survives remounts — reloading it per
+// mount caused a visible flicker on the globe.
 let cachedEarthTexture: THREE.Texture | null = null;
-
-// Matches the regions the company actually serves per its own profile
-// ("clients across India, the Middle East, Africa, and the Asia-Pacific
-// region") — the previous list (USA, Russia, Egypt, Libya) didn't.
-export const DESTINATION_COUNTRIES: CountryData[] = [
-  { id: "kuwait", name: "Kuwait", code: "KW", flag: "🇰🇼", lat: 29.3759, lon: 47.9774, capital: "Kuwait City" },
-  { id: "saudi_arabia", name: "Saudi Arabia", code: "SA", flag: "🇸🇦", lat: 23.8859, lon: 45.0792, capital: "Riyadh" },
-  { id: "qatar", name: "Qatar", code: "QA", flag: "🇶🇦", lat: 25.3548, lon: 51.1839, capital: "Doha" },
-  { id: "iran", name: "Iran", code: "IR", flag: "🇮🇷", lat: 32.4279, lon: 53.688, capital: "Tehran" },
-  { id: "iraq", name: "Iraq", code: "IQ", flag: "🇮🇶", lat: 33.2232, lon: 43.6793, capital: "Baghdad" },
-  { id: "uae", name: "United Arab Emirates", short: "UAE", code: "AE", flag: "🇦🇪", lat: 23.4241, lon: 53.8478, capital: "Abu Dhabi" },
-  { id: "thailand", name: "Thailand", code: "TH", flag: "🇹🇭", lat: 15.87, lon: 100.9925, capital: "Bangkok" },
-  { id: "indonesia", name: "Indonesia", code: "ID", flag: "🇮🇩", lat: -0.7893, lon: 113.9213, capital: "Jakarta" },
-  { id: "vietnam", name: "Vietnam", code: "VN", flag: "🇻🇳", lat: 14.0583, lon: 108.2772, capital: "Hanoi" },
-  { id: "australia", name: "Australia", code: "AU", flag: "🇦🇺", lat: -25.2744, lon: 133.7751, capital: "Canberra" },
-  { id: "new_zealand", name: "New Zealand", short: "NZ", code: "NZ", flag: "🇳🇿", lat: -40.9006, lon: 174.886, capital: "Wellington" },
-  { id: "ghana", name: "Ghana", code: "GH", flag: "🇬🇭", lat: 7.9465, lon: -1.0232, capital: "Accra" },
-  { id: "uganda", name: "Uganda", code: "UG", flag: "🇺🇬", lat: 1.3733, lon: 32.2903, capital: "Kampala" },
-  { id: "kenya", name: "Kenya", code: "KE", flag: "🇰🇪", lat: -1.2921, lon: 36.8219, capital: "Nairobi" },
-];
-
-const ALL_COUNTRIES = [ORIGIN_COUNTRY, ...DESTINATION_COUNTRIES];
 
 function latLongToVector3(lat: number, lon: number, radius = 5, altitude = 0): THREE.Vector3 {
   const phi = (90 - lat) * (Math.PI / 180);

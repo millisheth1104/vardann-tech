@@ -21,10 +21,6 @@ const fadeUp: Variants = {
 export default function PageHeader({ eyebrow, title, subtitle }: PageHeaderProps) {
   return (
     <section className="relative overflow-hidden pt-16 pb-14 sm:pt-20 sm:pb-16">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_50%_50%_at_50%_0%,rgba(0,80,160,0.12),transparent_65%)]"
-      />
       <motion.div
         className="relative mx-auto max-w-4xl px-6 text-center lg:px-10"
         variants={container}

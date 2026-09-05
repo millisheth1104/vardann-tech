@@ -18,9 +18,13 @@ export default function AboutHero() {
 
   return (
     <section className="relative overflow-hidden pt-16 pb-14 sm:pt-20 sm:pb-20">
+      {/* Blueprint grid, same construction as the homepage hero and the CTA
+          band. The radial mask is centred below the section's top edge on
+          purpose: an unmasked `inset-0` grid would terminate hard against
+          the transparent navbar strip and reintroduce the seam line there. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_50%_50%_at_15%_0%,rgba(0,80,160,0.12),transparent_65%)]"
+        className="pointer-events-none absolute inset-0 opacity-90 [background-image:linear-gradient(rgba(0,87,164,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(0,87,164,0.12)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_75%_62%_at_42%_58%,black,transparent)]"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1fr_0.9fr] lg:gap-6 lg:px-10">
         <motion.div

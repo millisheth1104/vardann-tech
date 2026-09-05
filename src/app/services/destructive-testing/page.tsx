@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { serviceMeta, conventionalNdtGroups } from "@/lib/content";
+import { serviceMeta, destructiveTestingGroups } from "@/lib/content";
 import ServiceHero from "@/components/services/ServiceHero";
 import MethodSection from "@/components/services/MethodSection";
 import ServiceNav from "@/components/services/ServiceNav";
 import CinematicCta from "@/components/services/CinematicCTA";
 
-const meta = serviceMeta.find((s) => s.id === "conventional-ndt")!;
+const meta = serviceMeta.find((s) => s.id === "destructive-testing")!;
 
 export const metadata: Metadata = {
-  title: "Conventional NDT | Vardann Tech and Engg LLP",
+  title: "Destructive Testing | Vardann Tech and Engg LLP",
   description:
-    "Ultrasonic testing, radiography, magnetic particle, liquid penetrant, hardness testing, coating thickness measurement and post weld heat treatment.",
+    "Positive material identification, optical emission spectroscopy and in-situ metallography — on-site chemical and metallurgical testing for welds, castings and components.",
 };
 
-export default function ConventionalNdtPage() {
+export default function DestructiveTestingPage() {
   return (
     <>
       <ServiceHero
@@ -25,7 +25,7 @@ export default function ConventionalNdtPage() {
         icon={meta.icon}
         image={meta.heroImage}
         codes={meta.eyebrow.split(" · ")}
-        badge="Field-Proven, Portable Methods"
+        badge="NACE Compliant Analysis"
       />
 
       <section className="section-divider bg-white/70 py-12 sm:py-16">
@@ -35,7 +35,7 @@ export default function ConventionalNdtPage() {
       </section>
 
       <div className="bg-continuous-light">
-        {conventionalNdtGroups.map((group) => (
+        {destructiveTestingGroups.map((group) => (
           <MethodSection key={group.title} group={group} />
         ))}
       </div>
@@ -43,10 +43,10 @@ export default function ConventionalNdtPage() {
       <ServiceNav currentId={meta.id} />
 
       <CinematicCta
-        eyebrow="Conventional NDT"
-        headline="Let's engineer what comes next."
+        eyebrow="Destructive Testing"
+        headline="Know exactly what you're working with."
         supporting="Talk to our engineering team about your inspection, testing or manufacturing requirement."
-        visualLabel="Technician performing ultrasonic testing"
+        visualLabel="On-site material chemistry verification"
         icon={meta.icon}
         image={meta.ctaImage}
       />

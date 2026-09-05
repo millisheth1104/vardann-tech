@@ -6,15 +6,19 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { serviceMeta } from "@/lib/content";
 
-// Asymmetric capability gallery — one dominant panel, two mid panels, one
-// wide panel beneath. Each panel owns its own hover choreography (zoom,
-// overlay, descriptor, arrow) since these are interactive nav tiles, not
-// passive image slots.
+// Asymmetric capability gallery — one dominant two-row panel on the left,
+// with the remaining four filling the 12-column grid two per row. Each
+// panel owns its own hover choreography (zoom, overlay, descriptor, arrow)
+// since these are interactive nav tiles, not passive image slots.
+// Spans are hand-tuned to total 12 per row alongside the dominant panel:
+//   row 1 → 5 (spanning both rows) + 4 + 3
+//   row 2 → 5 (continued)          + 3 + 4
 const LAYOUT: Record<string, string> = {
   "advanced-ndt": "lg:col-span-5 lg:row-span-2",
   "conventional-ndt": "lg:col-span-4 lg:row-span-1",
-  manufacturing: "lg:col-span-3 lg:row-span-1",
-  "destructive-testing-training": "lg:col-span-7 lg:row-span-1",
+  "destructive-testing": "lg:col-span-3 lg:row-span-1",
+  "training-certification": "lg:col-span-3 lg:row-span-1",
+  manufacturing: "lg:col-span-4 lg:row-span-1",
 };
 
 function GalleryPanel({ index }: { index: number }) {
@@ -44,7 +48,9 @@ function GalleryPanel({ index }: { index: number }) {
 
       <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
         <div className="flex items-center justify-between">
-          <span className="text-eyebrow text-[0.62rem] text-gold">{s.number} / 04</span>
+          <span className="text-eyebrow text-[0.62rem] text-gold">
+            {s.number} / {String(serviceMeta.length).padStart(2, "0")}
+          </span>
           <ArrowUpRight className="h-5 w-5 text-white opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
         </div>
 

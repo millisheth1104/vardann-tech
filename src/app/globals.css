@@ -68,7 +68,11 @@
 }
 
 :root {
-  --background: #f8f8f8;
+  /* Matches `.bg-continuous-light`'s 0% stop exactly. The navbar is a
+     sticky, transparent-backed header, so the strip around it shows the
+     body background — at #f8f8f8 against a gradient starting at #ffffff
+     that produced a hard horizontal line right under the nav bar. */
+  --background: #ffffff;
   --foreground: #283848;
   --card: #ffffff;
   --card-foreground: #283848;
@@ -116,6 +120,30 @@
 }
 
 @layer utilities {
+  /* Section separator that fades out at both ends, replacing a hard
+     `border-t`. Stacked down a long page, full-width 1px borders read as a
+     series of harsh straight seams — especially where a white band meets
+     the continuous gradient. */
+  .section-divider {
+    position: relative;
+  }
+  .section-divider::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 87, 164, 0.13) 20%,
+      rgba(0, 87, 164, 0.13) 80%,
+      transparent 100%
+    );
+  }
+
   .text-eyebrow {
     font-family: var(--font-lato);
     font-weight: 700;

@@ -28,7 +28,7 @@ export default function AdvancedNdtPage() {
         badge="ASME Standards Compliant"
       />
 
-      <section className="border-t border-vblue/10 bg-white py-12 sm:py-16">
+      <section className="section-divider bg-white/70 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl px-6 text-center lg:px-10">
           <p className="text-lg leading-relaxed text-navy sm:text-xl">{meta.intro}</p>
         </div>
