@@ -7,18 +7,21 @@ import { ArrowUpRight } from "lucide-react";
 import { serviceMeta } from "@/lib/content";
 
 // Asymmetric capability gallery — one dominant two-row panel on the left,
-// with the remaining four filling the 12-column grid two per row. Each
-// panel owns its own hover choreography (zoom, overlay, descriptor, arrow)
-// since these are interactive nav tiles, not passive image slots.
+// the next four filling the 12-column grid two per row, and the sixth as a
+// full-width closing band. Each panel owns its own hover choreography
+// (zoom, overlay, descriptor, arrow) since these are interactive nav tiles,
+// not passive image slots.
 // Spans are hand-tuned to total 12 per row alongside the dominant panel:
-//   row 1 → 5 (spanning both rows) + 4 + 3
-//   row 2 → 5 (continued)          + 3 + 4
+//   row 1 → 5 (spanning rows 1-2) + 4 + 3
+//   row 2 → 5 (continued)         + 3 + 4
+//   row 3 → 12
 const LAYOUT: Record<string, string> = {
   "advanced-ndt": "lg:col-span-5 lg:row-span-2",
   "conventional-ndt": "lg:col-span-4 lg:row-span-1",
-  "destructive-testing": "lg:col-span-3 lg:row-span-1",
-  "training-certification": "lg:col-span-3 lg:row-span-1",
-  manufacturing: "lg:col-span-4 lg:row-span-1",
+  "specialized-inspection": "lg:col-span-3 lg:row-span-1",
+  "metallography-material-analysis": "lg:col-span-3 lg:row-span-1",
+  "training-certification": "lg:col-span-4 lg:row-span-1",
+  manufacturing: "lg:col-span-12 lg:row-span-1",
 };
 
 function GalleryPanel({ index }: { index: number }) {

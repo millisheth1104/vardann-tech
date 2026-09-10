@@ -19,14 +19,6 @@ import TechIcon from "@/components/ui/TechIcon";
 const N = capabilities.length;
 const SEGMENT_VH = 70;
 
-const SERVICE_HREFS: Record<string, string> = {
-  "advanced-ndt": "/services/advanced-ndt",
-  "conventional-ndt": "/services/conventional-ndt",
-  "inspection-services": "/services/destructive-testing",
-  "metallography": "/services/destructive-testing",
-  "precision-manufacturing": "/services/manufacturing",
-  "training-certification": "/services/training-certification",
-};
 
 /* -------------------------------------------------------------------------- */
 /*                        1. Desktop Sticky 3D Deck Card                     */
@@ -50,7 +42,7 @@ function DesktopDeckCard({
   const zIndex = useTransform(depth, (d) => (Math.abs(d) < 0.5 ? 20 : 0));
 
   const tags = card.subtitle.split(" / ");
-  const targetHref = SERVICE_HREFS[card.id] || "/services";
+  const targetHref = `/services/${card.id}`;
 
   return (
     <motion.div
@@ -80,7 +72,7 @@ function DesktopDeckCard({
 
       <div className="relative flex h-full flex-col justify-center">
         <span className="text-eyebrow text-[0.65rem] text-gold">
-          Step {card.number} / 06
+          Step {card.number} / {String(N).padStart(2, "0")}
         </span>
         <h3 className="mt-3 font-display text-[2.15rem] lg:text-[2.9rem] text-white tracking-tight leading-tight">
           {card.title}
@@ -218,7 +210,7 @@ function MobileServicesCarousel() {
       >
         {capabilities.map((c, i) => {
           const tags = c.subtitle.split(" / ");
-          const targetHref = SERVICE_HREFS[c.id] || "/services";
+          const targetHref = `/services/${c.id}`;
 
           return (
             <div
@@ -244,7 +236,7 @@ function MobileServicesCarousel() {
                 <div className="relative z-10">
                   <div className="flex items-center justify-between">
                     <span className="text-eyebrow rounded-full bg-gold/15 border border-gold/40 px-2.5 py-0.5 text-[0.62rem] font-bold text-gold">
-                      Step {c.number} / 06
+                      Step {c.number} / {String(N).padStart(2, "0")}
                     </span>
                     <span className="text-xs font-mono font-bold text-white/40">
                       {i + 1} of {N}

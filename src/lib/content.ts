@@ -7,12 +7,25 @@ export const company = {
   tagline: "Powering Precision Globally",
   established: 2019,
   website: "www.vardanntech.com",
+  /** Used by the per-product enquiry links on the Products page. */
+  email: "info@vardanntech.com",
   social: "@vardanntech",
   quote: "Quality means doing it right when no one is looking.",
   about:
-    "Vardann Tech and Engg LLP is an independently owned, globally recognized manufacturer and engineering solutions provider specializing in Non-Destructive Testing (NDT), Inspection Services, Metallography, Precision Manufacturing, and Engineering Solutions.",
+    "VARDANN TECH AND ENGG LLP is an independently owned, globally recognized manufacturer and engineering solutions provider specializing in Non-Destructive Testing (NDT), Inspection Services, Metallography, Precision Manufacturing, and Engineering Solutions.",
+  /** Homepage intro — the approved profile-aligned copy, which already
+   *  carries its own "Established in 2019 … trusted by clients across …"
+   *  sentence, so the hero must not append its own region line. */
+  homeIntro:
+    "VARDANN TECH AND ENGG LLP is an independently owned, globally recognized manufacturer and engineering solutions provider specializing in Non-Destructive Testing (NDT), Inspection Services, Metallography, Precision Manufacturing, and Engineering Solutions. Established in 2019, our products and services are trusted by clients across India, the Middle East, Africa, and the Asia-Pacific region.",
   history:
     "Established in 2019, we are committed to delivering engineering excellence through innovative manufacturing, precision inspection, and ethical engineering practices. Our products and services are trusted by clients across India, the Middle East, Africa, and the Asia-Pacific region.",
+  /** About-page rebranding statement, approved wording. */
+  rebranding:
+    "Formerly known as ADVANCED NDT SERVICES LLP, we rebranded as VARDANN TECH AND ENGG LLP to reflect our broader vision and global commitment to engineering excellence.",
+  /** Shorter description for the footer, per the correction doc. */
+  footerDescription:
+    "VARDANN TECH AND ENGG LLP provides NDT inspection services, metallography, specialized inspection, precision manufacturing and engineered NDT products for clients worldwide.",
   vision:
     "To establish VARDANN TECH as a global symbol of precision, innovation, integrity, and trust in NDT and metallurgical engineering.",
   mission:
@@ -46,6 +59,7 @@ export type IconKey =
   | "penetrant"
   | "hardness"
   | "spectroscopy"
+  | "inspection"
   | "pipeline";
 
 export type ServiceGroup = {
@@ -127,12 +141,17 @@ export type Capability = {
   icon: IconKey;
 };
 
+// Homepage service deck. `id` is deliberately the service slug so the deck
+// links straight to `/services/{id}` — previously these were a separate
+// taxonomy ("Inspection Services", "Metallography", "Precision
+// Manufacturing") that no longer matched the real service pages, which is
+// how two different cards both ended up pointing at Destructive Testing.
 export const capabilities: Capability[] = [
   {
     id: "advanced-ndt",
     number: "01",
     title: "Advanced NDT",
-    subtitle: "ECT / RFT / IRIS / PAUT / TOFD / LRUT",
+    subtitle: "ECT / RFT / IRIS / NFT / PAUT / TOFD / LRUT",
     description:
       "Advanced non-destructive testing methods designed for accurate inspection, defect detection and condition assessment.",
     icon: "eddyCurrent",
@@ -141,46 +160,46 @@ export const capabilities: Capability[] = [
     id: "conventional-ndt",
     number: "02",
     title: "Conventional NDT",
-    subtitle: "UT / MPI / DPT / RT / Hardness",
+    subtitle: "UT / UTG / RT / MPT / LPT / Hardness",
     description:
       "Field-proven inspection techniques for flaw detection, thickness gauging and coating verification.",
     icon: "ultrasonic",
   },
   {
-    id: "inspection-services",
+    id: "specialized-inspection",
     number: "03",
-    title: "Inspection Services",
-    subtitle: "QA/QC / Vendor Surveillance / PMI / OES",
+    title: "Specialized & Third-Party Inspection",
+    subtitle: "QA/QC / Vendor Surveillance / PMI / OES / PWHT",
     description:
-      "Third-party inspection, supervision and material verification for demanding industrial projects.",
-    icon: "welding",
+      "Independent QA/QC supervision, welding inspection and vendor surveillance, with on-site material verification.",
+    icon: "inspection",
   },
   {
-    id: "metallography",
+    id: "metallography-material-analysis",
     number: "04",
-    title: "Metallography",
-    subtitle: "In-Situ Metallography / Microstructure Analysis",
+    title: "Metallography and Material Analysis",
+    subtitle: "PMI / OES / In-Situ Metallography / Microstructure",
     description:
-      "Precision microstructure analysis and material characterization performed in-situ or in-lab.",
+      "Chemical analysis, material verification and metallurgical evaluation, performed on site without damaging the component.",
     icon: "metallography",
   },
   {
-    id: "precision-manufacturing",
+    id: "training-certification",
     number: "05",
-    title: "Precision Manufacturing",
-    subtitle: "Calibration Blocks / Tubes / Welded Specimens",
+    title: "Training & Certification",
+    subtitle: "NDT Level I, II & III Training",
     description:
-      "CNC / EDM machined calibration standards manufactured to ASME specifications with NABL/NPL traceability.",
-    icon: "manufacturing",
+      "Professional NDT training aligned with applicable ASNT recommended practices, combining theory with hands-on practicals.",
+    icon: "training",
   },
   {
-    id: "training-certification",
+    id: "manufacturing",
     number: "06",
-    title: "Training & Certification",
-    subtitle: "NDT Method Training / Post Weld Heat Treatment",
+    title: "Manufacturing & Products",
+    subtitle: "Calibration Blocks / Tubes / Probes / Welded Specimens",
     description:
-      "Hands-on training and certification support across NDT methods and welding inspection practices.",
-    icon: "training",
+      "Precision manufacturing of calibration standards, probes, wedges, welded specimens and engineered NDT products.",
+    icon: "manufacturing",
   },
 ];
 
@@ -277,6 +296,159 @@ export const owners: Owner[] = [
 
 export const bestsellerProducts: Product[] = [
   {
+    // §9 of the client's correction list: the catalogue's required product
+    // categories that the site was missing. Images are the client's own
+    // product photography from the supplied IMAGES set.
+    id: "calibration-tubes",
+    category: "Tube Inspection",
+    name: "Calibration Tubes",
+    description:
+      "Precision-machined tubular reference standards with machined defects for probe and procedure qualification across ECT, RFT, NFT, IRIS, ECA and MFL.",
+    spec: "30+ materials · custom defect type, size and location",
+    icon: "calibrationTube",
+    image: "/products/calibration-tubes.png",
+  },
+  {
+    id: "customised-ut-probes",
+    category: "Probe Accessories",
+    name: "Customised Ultrasonic Probes",
+    description:
+      "Ultrasonic probes built to a specified frequency, element configuration and connector type for non-standard inspection geometries.",
+    spec: "Made to customer frequency and connector specification",
+    icon: "transducer",
+    image: "/products/customised-ut-probes.png",
+  },
+  {
+    id: "aod-cod-wedges",
+    category: "Accessories",
+    name: "AOD & COD Wedges",
+    description:
+      "Angle-on-demand and crack-opening-displacement wedges for angle beam and weld inspection setups.",
+    spec: "Supplied as matched sets or individually",
+    icon: "wedge",
+    image: "/products/aod-cod-wedges.png",
+  },
+  {
+    id: "probe-cables-connectors",
+    category: "Accessories",
+    name: "Probe Cables & Connectors",
+    description:
+      "Coaxial probe cables and connectors in the common instrument terminations, supplied to length.",
+    spec: "Lemo · BNC · Microdot terminations",
+    icon: "probe",
+    image: "/products/probe-cables-connectors.png",
+  },
+  {
+    id: "astm-e127-fbh-block-set",
+    category: "Calibration Standards",
+    name: "ASTM E127 FBH Block Set",
+    description:
+      "Flat-bottom-hole reference block sets for ultrasonic distance-amplitude and area-amplitude calibration per ASTM E127.",
+    spec: "Basic, area-amplitude and distance-amplitude sets",
+    icon: "testBlock",
+    image: "/products/astm-e127-fbh-block-set.png",
+  },
+  {
+    id: "navships-test-block",
+    category: "Calibration Standards",
+    name: "NAVSHIPS Test Block",
+    description:
+      "Multi-hole ultrasonic reference block for sensitivity and resolution checks to the NAVSHIPS specification.",
+    spec: "AISI 1018 steel",
+    icon: "testBlock",
+    image: "/products/navships-test-block.png",
+  },
+  {
+    id: "dc-test-block",
+    category: "Calibration Standards",
+    name: "DC Test Block",
+    description:
+      "Distance-calibration block for angle beam probe index and refracted-angle verification.",
+    spec: "AISI 1018 steel",
+    icon: "testBlock",
+    image: "/products/dc-test-block.png",
+  },
+  {
+    id: "dsc-test-block",
+    category: "Calibration Standards",
+    name: "DSC Test Block",
+    description:
+      "Distance and sensitivity calibration block with engraved angle scale for shear-wave probe setup.",
+    spec: "AISI 1018 steel",
+    icon: "testBlock",
+    image: "/products/dsc-test-block.png",
+  },
+  {
+    id: "mpi-test-block",
+    category: "Conventional NDT",
+    name: "MPI Test Block",
+    description:
+      "Reference block for verifying magnetic particle system sensitivity and field adequacy before inspection.",
+    spec: "Part of the MPI accessory kit",
+    icon: "magneticParticle",
+    image: "/products/mpi-test-block.png",
+  },
+  {
+    id: "mpi-field-indicator",
+    category: "Conventional NDT",
+    name: "MPI Field Indicator",
+    description:
+      "Pie-type field indicators for confirming magnetic field direction and strength at the inspection surface.",
+    spec: "Supplied in three sizes",
+    icon: "magneticParticle",
+    image: "/products/mpi-field-indicator.jpg",
+  },
+  {
+    id: "mpi-blower",
+    category: "Conventional NDT",
+    name: "MPI Powder Blower",
+    description:
+      "Hand blower for applying dry magnetic particle powder evenly across the test surface.",
+    spec: "Part of the MPI accessory kit",
+    icon: "magneticParticle",
+    image: "/products/mpi-blower.png",
+  },
+  {
+    id: "insitu-metallography-camera",
+    category: "Metallography",
+    name: "In-Situ Metallography Camera Unit",
+    description:
+      "Portable metallurgical microscope and camera head for capturing microstructure directly on the component, without cutting a sample.",
+    spec: "On-site microstructure imaging",
+    icon: "metallography",
+    image: "/products/insitu-metallography-camera.png",
+  },
+  {
+    id: "electrolytic-polisher-etcher",
+    category: "Metallography",
+    name: "Electrolytic Polisher & Etcher",
+    description:
+      "Bench unit for preparing a polished and etched surface in the field ahead of in-situ microstructure examination.",
+    spec: "Adjustable current and etch time",
+    icon: "metallography",
+    image: "/products/electrolytic-polisher-etcher.png",
+  },
+  {
+    id: "pwht-control-panel",
+    category: "Post Weld Heat Treatment",
+    name: "PWHT Control Panel",
+    description:
+      "Multi-zone heat treatment control panels with programmable ramp, soak and cool cycles and chart recording.",
+    spec: "Multi-zone · programmable cycle control",
+    icon: "welding",
+    image: "/products/pwht-control-panel.png",
+  },
+  {
+    id: "pwht-heating-accessories",
+    category: "Post Weld Heat Treatment",
+    name: "PWHT Cables & Heating Accessories",
+    description:
+      "Ceramic pad heating elements, power and extension cables, connectors and insulation for post weld heat treatment set-ups.",
+    spec: "Heating pads · cables · connectors · insulation",
+    icon: "welding",
+    image: "/products/pwht-heating-accessories.png",
+  },
+  {
     id: "welded-specimen-set",
     category: "Welded Specimens",
     name: "Welded Flawed Specimen Set",
@@ -302,7 +474,7 @@ export const bestsellerProducts: Product[] = [
     name: "Calibration Step Wedge Block",
     description:
       "5-step 1018 carbon steel wedge block for ultrasonic thickness and sensitivity calibration.",
-    spec: "NABL / NPL traceability on every block",
+    spec: "Dimensional traceability available on request",
     icon: "testBlock",
     image: "/products/calibration-step-block-a.png",
   },
@@ -312,7 +484,7 @@ export const bestsellerProducts: Product[] = [
     name: "Calibration Step Wedge Block — 1018 Steel",
     description:
       "Precision-ground 5-step calibration block, CNC/EDM machined to IIW-style tolerances.",
-    spec: "NABL / NPL traceability on every block",
+    spec: "Dimensional traceability available on request",
     icon: "testBlock",
     image: "/products/calibration-step-block-b.png",
   },
@@ -596,7 +768,7 @@ export const serviceMeta: ServiceMeta[] = [
     number: "02",
     slug: "conventional-ndt",
     title: "Conventional NDT",
-    eyebrow: "UT · UTG · RT · MT · PT · HT · PWHT",
+    eyebrow: "UT · UTG · HTTG · RT · MPT · LPT · HT · CTM · PWHT",
     headline: "Proven inspection. Precise decisions.",
     subtitle: "Field-Proven Flaw Detection & Material Verification",
     intro:
@@ -610,16 +782,37 @@ export const serviceMeta: ServiceMeta[] = [
     accent: "vblue",
   },
   {
-    id: "destructive-testing",
+    id: "specialized-inspection",
     number: "03",
-    slug: "destructive-testing",
-    title: "Destructive Testing",
-    eyebrow: "PMI · OES · METALLOGRAPHY",
+    slug: "specialized-inspection",
+    title: "Specialized & Third-Party Inspection",
+    eyebrow: "QA/QC · VENDOR SURVEILLANCE · PMI · OES · PWHT",
+    headline: "Independent verification, on site.",
+    subtitle: "QA/QC Supervision · Vendor Surveillance · Third-Party Inspection",
+    intro:
+      "Independent QA/QC supervision, welding inspection and vendor surveillance, supported by on-site material verification and post weld heat treatment.",
+    cardDescriptor: "QA/QC supervision, vendor surveillance & material verification",
+    heroVisualLabel: "Third-party weld inspection on site",
+    heroImage: "/services/conventional-ndt-cta.jpg",
+    galleryImage: "/services/group-conventional-methods.jpg",
+    ctaImage: "/services/hub-cta.jpg",
+    icon: "inspection",
+    accent: "vblue",
+  },
+  {
+    // Renamed from "Destructive Testing": PMI, portable XRF and in-situ
+    // metallography are not destructive techniques, so grouping them under
+    // that heading was inaccurate.
+    id: "metallography-material-analysis",
+    number: "04",
+    slug: "metallography-material-analysis",
+    title: "Metallography and Material Analysis",
+    eyebrow: "PMI · OES · METALLOGRAPHY · MICROSTRUCTURE",
     headline: "Understand the material.",
-    subtitle: "Chemical Analysis · Metallurgical Testing",
+    subtitle: "Chemical Analysis · Material Verification · Metallurgical Evaluation",
     intro:
       "Portable XRF and optical emission analysis confirm material chemistry on site, and in-situ metallography examines microstructure directly on the component without damaging it.",
-    cardDescriptor: "Chemical & metallurgical testing, on site",
+    cardDescriptor: "Chemical analysis, material verification & metallurgical evaluation",
     heroVisualLabel: "In-situ metallography on a weld cross-section",
     heroImage: "/services/destructive-testing-hero.jpg",
     galleryImage: "/services/group-chemical-metallurgical.jpg",
@@ -629,14 +822,14 @@ export const serviceMeta: ServiceMeta[] = [
   },
   {
     id: "training-certification",
-    number: "04",
+    number: "05",
     slug: "training-certification",
     title: "Training & Certification",
     eyebrow: "ASNT LEVEL I · II · III",
     headline: "Build the expertise.",
     subtitle: "NDT Level I, II & III Training",
     intro:
-      "Professional training and certification courses in NDT Level I, II and III as per ASNT standards — theory combined with hands-on practical sessions across PAUT, TOFD, ECT, RFET, IRIS, UT, MT and PT methods.",
+      "Professional training and in-house certification in NDT Level I, II and III, aligned with applicable ASNT recommended practices — theory combined with hands-on practical sessions across PAUT, TOFD, ECT, RFT, IRIS, UT, MPT and LPT methods.",
     cardDescriptor: "ASNT-aligned NDT Level I, II & III training",
     heroVisualLabel: "ASNT-aligned NDT training session",
     heroImage: "/services/group-training.jpg",
@@ -647,9 +840,9 @@ export const serviceMeta: ServiceMeta[] = [
   },
   {
     id: "manufacturing",
-    number: "05",
+    number: "06",
     slug: "manufacturing",
-    title: "Manufacturing",
+    title: "Manufacturing & Products",
     eyebrow: "CNC · VMC · EDM · WIRE CUT · FABRICATION",
     headline: "Precision engineered to specification.",
     subtitle: "Precision Manufacturing & Fabrication",
@@ -684,16 +877,21 @@ export const advancedNdtGroups: ServiceMethodGroup[] = [
         code: "RFT",
         name: "Remote Field Testing",
         scope: "Ferrous tubing",
-        points: ["Measures wall thinning / corrosion up to 12mm"],
-        advantages: ["Fast screening for carbon steel", "Ferritic alloys"],
+        // The previous "up to 12mm" figure was removed per the client's
+        // correction: it isn't verified for a specific probe range.
+        points: ["Detects and assesses wall thinning and corrosion"],
+        advantages: ["Carbon-steel tubes", "Ferritic-alloy tubes"],
         icon: "probe",
       },
       {
         code: "IRIS",
         name: "Internal Rotary Inspection System",
-        scope: "All materials",
-        points: ["Remaining wall thickness from corrosion", "Erosion"],
-        advantages: ["B-scan imaging", "C-scan imaging"],
+        scope: "All tube materials",
+        points: [
+          "Precision ultrasonic measurement of remaining wall thickness",
+          "Identifies corrosion or erosion",
+        ],
+        advantages: ["Detailed B-scan imaging", "Detailed C-scan imaging"],
         icon: "ultrasonic",
       },
       {
@@ -743,7 +941,10 @@ export const advancedNdtGroups: ServiceMethodGroup[] = [
         code: "PECT",
         name: "Pulsed Eddy Current Testing",
         scope: "Corrosion under insulation (CUI)",
-        points: ["Wall thickness through insulation, coatings, marine growth"],
+        points: [
+          "Measures wall thickness through insulation, coatings or marine growth",
+        ],
+        advantages: ["Particularly suited to corrosion-under-insulation inspection"],
         icon: "eddyCurrent",
       },
       {
@@ -765,11 +966,37 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
     image: "/services/group-conventional-methods.jpg",
     methods: [
       {
-        code: "UT / UTG",
-        name: "Ultrasonic Testing / Thickness Gauging",
+        code: "UT",
+        name: "Ultrasonic Testing",
         scope: "Base materials & welds",
-        points: ["High-frequency sound waves measure thickness", "Detect internal or surface flaws"],
+        points: [
+          "High-frequency sound waves detect internal and surface flaws",
+        ],
         advantages: ["Single-sided access", "Immediate results"],
+        icon: "ultrasonic",
+      },
+      {
+        // Split from the combined "UT / UTG" entry: thickness gauging is a
+        // distinct scope of work, not a footnote to flaw detection.
+        code: "UTG",
+        name: "Ultrasonic Thickness Gauging",
+        scope: "Pipes, vessels, tanks, structural steel",
+        points: [
+          "Measures remaining wall thickness",
+          "Quantifies corrosion and erosion loss",
+        ],
+        advantages: ["Single-sided access", "Immediate results"],
+        icon: "ultrasonic",
+      },
+      {
+        code: "HTTG",
+        name: "High-Temperature Thickness Gauging",
+        scope: "In-service equipment at elevated temperature",
+        points: [
+          "Thickness measurement without shutting the asset down",
+          "High-temperature probes and couplants",
+        ],
+        advantages: ["No production interruption", "Live-plant monitoring"],
         icon: "ultrasonic",
       },
       {
@@ -781,7 +1008,7 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
         icon: "radiography",
       },
       {
-        code: "MT",
+        code: "MPT",
         name: "Magnetic Particle Testing",
         scope: "Ferromagnetic materials",
         points: ["Magnetic fields + iron particles reveal surface / near-surface cracks"],
@@ -789,7 +1016,7 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
         icon: "magneticParticle",
       },
       {
-        code: "PT",
+        code: "LPT",
         name: "Liquid Penetrant Testing",
         scope: "Non-porous materials",
         points: ["Detects surface discontinuities"],
@@ -821,9 +1048,14 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
   },
 ];
 
-export const destructiveTestingGroups: ServiceMethodGroup[] = [
+// Renamed from destructiveTestingGroups when the service became
+// "Metallography and Material Analysis" — the work is chemical and
+// metallurgical characterisation, not destructive mechanical testing.
+export const metallographyGroups: ServiceMethodGroup[] = [
   {
-    title: "Chemical & Metallurgical Testing",
+    title: "Chemical & Metallurgical Analysis",
+    intro:
+      "Alloy verification and microstructural evaluation — confirming that the material in the asset is the material the specification called for.",
     image: "/services/group-chemical-metallurgical.jpg",
     methods: [
       {
@@ -831,7 +1063,7 @@ export const destructiveTestingGroups: ServiceMethodGroup[] = [
         name: "Positive Material Identification",
         scope: "Welds, castings, components",
         points: ["Portable XRF analyzers identify alloy composition"],
-        advantages: ["NACE compliance"],
+        advantages: ["Supports NACE material compliance"],
         icon: "spectroscopy",
       },
       {
@@ -849,24 +1081,106 @@ export const destructiveTestingGroups: ServiceMethodGroup[] = [
         points: ["On-site microstructure analysis without damaging the component"],
         icon: "metallography",
       },
+      {
+        code: "MSA",
+        name: "Microstructure Analysis",
+        scope: "Weldments, heat-affected zones, base metal",
+        points: [
+          "Grain structure, phase distribution and inclusion assessment",
+          "Evaluates heat-treatment and welding effects on the material",
+        ],
+        advantages: ["Supports failure investigation", "Confirms metallurgical condition"],
+        icon: "metallography",
+      },
     ],
   },
 ];
 
-// Split out of destructiveTestingGroups when Destructive Testing and
+// Cross-listed service: QA/QC and third-party inspection scopes are sold
+// as their own engagement, while PMI / OES / ISM / PWHT also appear under
+// their originating disciplines. Duplication here is deliberate — the
+// client asked for these methods on both pages.
+export const specializedInspectionGroups: ServiceMethodGroup[] = [
+  {
+    title: "Third-Party & Vendor Inspection",
+    intro:
+      "Independent oversight on your behalf — at the vendor's works, during fabrication and before despatch.",
+    image: "/services/group-chemical-metallurgical.jpg",
+    methods: [
+      {
+        code: "QA/QC",
+        name: "QA / QC Inspection Services",
+        scope: "Fabrication, welding, pressure equipment",
+        points: [
+          "Stage-wise inspection against approved drawings and procedures",
+          "Documentation review and inspection reporting",
+        ],
+        advantages: ["Independent verification", "Traceable records"],
+        icon: "inspection",
+      },
+      {
+        code: "VS",
+        name: "Vendor Surveillance & Expediting",
+        scope: "Supplier works and sub-vendors",
+        points: [
+          "Witness and hold-point attendance at the vendor's premises",
+          "Progress monitoring through to final despatch clearance",
+        ],
+        advantages: ["Reduces rework on delivery", "Schedule visibility"],
+        icon: "inspection",
+      },
+      {
+        code: "PMI",
+        name: "Positive Material Identification",
+        scope: "Incoming material and installed components",
+        points: ["Portable XRF alloy verification during inspection scopes"],
+        advantages: ["Catches material substitution at source"],
+        icon: "spectroscopy",
+      },
+      {
+        code: "OES",
+        name: "Optical Emission Spectroscopy",
+        scope: "Spark testing",
+        points: ["Full elemental composition where XRF is not sufficient"],
+        advantages: ["Carbon and light-element analysis"],
+        icon: "spectroscopy",
+      },
+      {
+        code: "ISM",
+        name: "In-Situ Metallography",
+        scope: "Welds, power plants, pipelines",
+        points: ["On-site microstructural assessment without removing material"],
+        icon: "metallography",
+      },
+      {
+        code: "PWHT",
+        name: "Post Weld Heat Treatment",
+        scope: "Pressure vessels, piping, process equipment",
+        points: [
+          "Relieves residual stress",
+          "Restores mechanical properties after welding",
+        ],
+        advantages: ["Calibrated cycle records", "Chart verification"],
+        icon: "welding",
+      },
+    ],
+  },
+];
+
+// Split out of the metallography groups when Destructive Testing and
 // Training & Certification became two separate services — the brochure
 // already treated them as two distinct sub-sections.
 export const trainingGroups: ServiceMethodGroup[] = [
   {
     title: "Training & Certification",
     intro:
-      "NDT Level I, II and III as per ASNT standards — theory paired with hands-on practicals across every method we operate in the field.",
+      "NDT Level I, II and III aligned with applicable ASNT recommended practices — theory paired with hands-on practicals across every method we operate in the field.",
     image: "/services/group-training.jpg",
     methods: [
       {
         code: "L1–L3",
         name: "ASNT-Aligned NDT Training",
-        scope: "PAUT · TOFD · ECT · RFT · IRIS · UT · MT · PT",
+        scope: "PAUT · TOFD · ECT · RFT · IRIS · UT · MPT · LPT",
         points: ["Theory + hands-on practicals for each method"],
         advantages: [
           "Practical learning",
@@ -904,16 +1218,18 @@ export const manufacturingContent = {
     "Stainless Steel",
     "Alloy Steel",
     "Duplex Stainless Steel",
+    "Nickel Alloys",
     "Aluminium",
     "Copper Alloys",
     "Titanium",
     "Engineering Plastics",
+    "Other Customer-Specified Materials",
   ],
   services: [
     "Prototype development",
     "Reverse engineering",
     "Job work",
-    "Batch production from customer drawings / specifications",
+    "Batch production from customer drawings, samples and specifications",
   ],
   products: [
     {
@@ -932,7 +1248,11 @@ export const manufacturingContent = {
       name: "Calibration Tubes & ECT / RFT / NFT Probes",
       description:
         "Precision-machined tubular inspection standards for tube and probe qualification work.",
-      specs: ["30+ materials", "Manufactured per ASME standards", "3–6 day custom shipping"],
+      specs: [
+        "30+ materials",
+        "Manufactured in accordance with applicable ASME, ASTM, ISO or customer-specified requirements",
+        "3–6 day custom shipping",
+      ],
       icon: "calibrationTube",
       image: "/services/product-calibration-tubes-probes.jpg",
     },
@@ -941,9 +1261,10 @@ export const manufacturingContent = {
       description:
         "CNC / EDM machined calibration standards manufactured to IIW and ASME tolerances.",
       specs: [
-        "IIW Type 1 · IIW Type 2 · V1 · V2 · ASME Section V",
+        "V1/5 (A2) · IIW Type 1 · IIW Type 2 · V1 · V2 · DC · DSC",
+        "ASTM E127 FBH block sets · NAVSHIPS test blocks",
         "Step wedges · Custom pipe blocks",
-        "NABL / NPL traceable",
+        "Calibration and dimensional traceability available where applicable",
       ],
       icon: "testBlock",
       image: "/services/product-calibration-blocks.jpg",
@@ -961,7 +1282,7 @@ export const whyVardann = [
   "Customer-Focused Engineering Solutions",
 ];
 
-// Every method/discipline code across all four services, deduped — used by
+// Every method/discipline code across all six services, deduped — used by
 // the marquee strip on the services hub.
 export const allMethodCodes = Array.from(
   new Set(serviceMeta.flatMap((s) => s.eyebrow.split(" · "))),

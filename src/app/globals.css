@@ -203,6 +203,87 @@
   letter-spacing: -0.005em;
 }
 
+/* Global-presence map entrance. Pure CSS keyframes driven by a single
+   class that an IntersectionObserver toggles once — no per-frame JS and no
+   animation-completion callbacks, both of which have proven fragile here
+   (throttled frames stall rAF loops and Framer exit callbacks).
+   Routes use SVG `pathLength="1"`, so a dashoffset of 1 -> 0 draws the
+   stroke regardless of its real geometric length. */
+@keyframes map-route-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes map-marker-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes map-halo-ping {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(2.3);
+  }
+}
+
+/* fill-box + center origin so SVG circles scale about themselves rather
+   than the viewBox origin. */
+.map-marker,
+.map-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* The map is fully drawn and visible by DEFAULT. The entrance only exists
+   inside `.map-animate`, which an IntersectionObserver adds — so if that
+   observer never fires (throttled/backgrounded tab, no IO support, JS
+   disabled) the map still renders complete instead of blank. Never gate
+   content visibility on an animation callback.
+   `animation-fill-mode: both` applies each keyframe's from-state during
+   its stagger delay, which is what keeps items hidden until their turn
+   without hiding them in the base state. */
+.map-animate .map-route {
+  stroke-dasharray: 1;
+  animation: map-route-draw 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.map-animate .map-marker {
+  animation: map-marker-pop 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.map-animate .map-halo {
+  animation: map-halo-ping 2.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-animate .map-route,
+  .map-animate .map-marker,
+  .map-animate .map-halo {
+    animation: none;
+    stroke-dasharray: none;
+    opacity: revert-layer;
+  }
+}
+
 /* Preloader's sweeping accent bar. Pure CSS for the same reason the
    preloader avoids Framer Motion entirely — it must not depend on a JS
    frame callback to look alive (see Preloader.tsx). */

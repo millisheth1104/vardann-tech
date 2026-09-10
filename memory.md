@@ -335,3 +335,51 @@ before assuming a "module not found" build error is a code bug.
   GlobeCdn + CursorImageTrail.
 - Pages: `/`, `/about`, `/services`, `/products`, `/contact` — all verified render
   correctly and `npm run build` passes cleanly (static export, 6 routes).
+
+## Client correction list (Correction.docx) — applied 2026-09-10
+
+The client sent a 14-section correction document. All of it is applied
+**except §12 (contact details) and §13 (contact form)** — the user said
+verbatim: *"please just dont do anything for contact page"*. Those two
+sections are still outstanding and are the client's, not ours, to unblock.
+
+Decisions the user made when asked:
+- New service page name: **"Metallography and Material Analysis"** (not
+  "Metallography & Material Analysis").
+- Methods that appear in two disciplines (PMI / OES / ISM / PWHT) are
+  **cross-listed on both** pages — the duplication is deliberate.
+- Abbreviations: **MPT** and **LPT** (not MT / PT).
+
+Service count went 5 → 6. Slugs, `serviceMeta.id`, `capabilities.id` and the
+route directory names are now all the same string, so nav/footer/mega-menu/
+gallery/deck all derive their hrefs as `/services/${id}`. The hand-maintained
+`SERVICE_HREFS` table in `ServiceDeck.tsx` is gone — it had drifted and was
+pointing two different cards at the same page. Don't reintroduce it.
+
+`/services/destructive-testing` → `/services/metallography-material-analysis`
+is a permanent redirect in `next.config.ts`.
+
+### Claims that were deliberately weakened — do not "restore" them
+The client explicitly asked for these because they can't be substantiated:
+- RFT no longer claims "wall thinning up to 12 mm" (not verified for a
+  specific probe/equipment range).
+- Training is "aligned with applicable ASNT recommended practices" with
+  **in-house** certification — not "certified as per ASNT standards".
+- No NABL/NPL claim anywhere as a *manufacturing* standard. Products are
+  "manufactured in accordance with applicable ASME, ASTM, ISO or
+  customer-specified requirements, with calibration and dimensional
+  traceability available where applicable".
+- "Global Presence" → **"Global Supply Footprint"**: the company has no
+  office in the 14 listed countries, it has *supplied* them.
+
+### Product images
+`IMAGES-20260831T183334Z-1-001/IMAGES/` is the client's own product
+photography. Use it as the source for any new product card — do not download
+stock images from the web for this commercial site, and do not upscale the
+photos containing real employees (tried aura-sr and esrgan; both mangled a
+face). Product count went 24 → 39 to cover the §9 required categories.
+
+Products now deep-link: homepage bestseller cards point at
+`/products#<product-id>`, and `ProductGrid` opens that product's modal from
+the hash. Each modal has a per-product `mailto:` enquiry link built from
+`company.email`.

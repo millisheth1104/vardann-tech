@@ -38,13 +38,11 @@ export default function AboutHero() {
           </span>
 
           <h1 className="mt-5 font-display text-[2.9rem] leading-[1.05] tracking-tight text-navy sm:text-[3.6rem]">
-            Company Profile.
+            Company <span className="text-vblue italic">Profile.</span>
           </h1>
 
           <p className="mt-5 max-w-lg text-base leading-relaxed text-body sm:text-lg">
-            Formerly known as {company.formerlyKnownAs}. We have rebranded as{" "}
-            {company.name} to reflect our broader vision and global commitment
-            to engineering excellence.
+            {company.rebranding}
           </p>
         </motion.div>
 

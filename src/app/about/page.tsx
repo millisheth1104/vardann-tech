@@ -15,7 +15,7 @@ const stats = [
   { value: `${company.established}`, label: "Founded" },
   { value: "4+", label: "Regions Served" },
   { value: "6", label: "Core Disciplines" },
-  { value: "ASME / NABL", label: "Standards Met" },
+  { value: "ASME", label: "Compliant Products" },
 ];
 
 export default function AboutPage() {

@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { Download, Eye, X } from "lucide-react";
-import type { Product } from "@/lib/content";
+import { Download, Eye, Mail, X } from "lucide-react";
+import { company, type Product } from "@/lib/content";
 
-// Order follows the brochure's own "Our Product" page sequence (tube
+// Order follows the brochure's own "Our Products" page sequence (tube
 // probes → transducers/cables/accessories → ultrasonic test blocks → MPI
 // kits → welded specimens → PWHT), not alphabetical — so the grouped page
 // reads the same way the source document does. Any category not listed
@@ -20,6 +20,7 @@ const CATEGORY_ORDER = [
   "Conventional NDT",
   "Welded Specimens",
   "Inspection Equipment",
+  "Metallography",
   "Post Weld Heat Treatment",
 ];
 
@@ -49,6 +50,21 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const [active, setActive] = useState<Product | null>(null);
   const groups = groupByCategory(products);
 
+  // Deep link support: /products#<product-id> scrolls to the card (via the
+  // anchor id below) and opens its detail modal, so cards on the homepage
+  // can point at a specific product instead of the whole page.
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = window.location.hash.slice(1);
+      if (!id) return;
+      const match = products.find((p) => p.id === id);
+      if (match) setActive(match);
+    };
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [products]);
+
   useEffect(() => {
     if (!active) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -70,8 +86,9 @@ export default function ProductGrid({ products }: { products: Product[] }) {
               {group.items.map((p) => (
                 <div
                   key={p.id}
+                  id={p.id}
                   onClick={() => setActive(p)}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl border border-vblue/10 bg-white shadow-sm transition-colors hover:border-vblue/50"
+                  className="group relative scroll-mt-28 cursor-pointer overflow-hidden rounded-2xl border border-vblue/10 bg-white shadow-sm transition-colors hover:border-vblue/50"
                 >
                   <div className="relative aspect-square w-full">
                     <Image
@@ -148,14 +165,30 @@ export default function ProductGrid({ products }: { products: Product[] }) {
                 <p className="mt-3 text-[0.78rem] leading-snug tracking-normal text-steel italic">
                   {active.spec}
                 </p>
-                <a
-                  href="/vardann-tech-brochure.pdf"
-                  download
-                  className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-vblue bg-white px-5 py-2.5 text-eyebrow text-[0.65rem] text-vblue transition-colors hover:bg-lightblue"
-                >
-                  <Download className="h-4 w-4" />
-                  Download Brochure
-                </a>
+                <div className="mt-5 flex flex-wrap items-center gap-2.5">
+                  {/* Per-product enquiry, per the correction list — the
+                      subject line carries the product name so an enquiry
+                      arrives already identified. */}
+                  <a
+                    href={`mailto:${company.email}?subject=${encodeURIComponent(
+                      `Enquiry: ${active.name}`,
+                    )}&body=${encodeURIComponent(
+                      `I would like more information about the ${active.name}.`,
+                    )}`}
+                    className="inline-flex w-fit items-center gap-2 rounded-full bg-vblue px-5 py-2.5 text-eyebrow text-[0.65rem] text-white transition-colors hover:bg-navy"
+                  >
+                    <Mail className="h-4 w-4" />
+                    Enquire About This Product
+                  </a>
+                  <a
+                    href="/vardann-tech-brochure.pdf"
+                    download
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-vblue bg-white px-5 py-2.5 text-eyebrow text-[0.65rem] text-vblue transition-colors hover:bg-lightblue"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download Brochure
+                  </a>
+                </div>
               </div>
             </motion.div>
           </motion.div>

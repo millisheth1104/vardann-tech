@@ -13,9 +13,13 @@ export default function ProductsPage() {
     <>
       <div className="bg-continuous-light">
       <PageHeader
-        eyebrow="Our Product"
-        title="Precision You Can Measure."
-        subtitle="Calibration tubes, probes, test blocks and welded specimens — manufactured per ASME standards with NABL/NPL traceability. Custom orders typically ship within 3–6 days."
+        eyebrow="Our Products"
+        title={
+          <>
+            Precision You Can <span className="text-vblue italic">Measure.</span>
+          </>
+        }
+        subtitle="Calibration tubes, probes, test blocks and welded specimens — manufactured in accordance with applicable ASME, ASTM, ISO or customer-specified requirements, with calibration and dimensional traceability available where applicable. Custom orders typically ship within 3–6 days."
       />
 
       <section className="pb-20 sm:pb-28">

@@ -44,7 +44,7 @@ export default function BestsellersCarousel() {
             style={{ scrollSnapAlign: "start" }}
           >
             <Link
-              href="/products"
+              href={`/products#${p.id}`}
               className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-vblue/10 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-vblue/50 hover:shadow-xl"
             >
               <div className="relative aspect-square w-full shrink-0">

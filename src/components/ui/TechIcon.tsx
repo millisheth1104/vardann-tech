@@ -9,6 +9,20 @@ type TechIconProps = {
 // product/category visual in the site is one of these technical glyphs
 // rendered via currentColor, instead of stock/lifestyle imagery.
 const PATHS: Record<IconKey, React.ReactNode> = {
+  // Clipboard + magnifier: third-party / QA-QC inspection, which is a
+  // documentation-and-witness discipline rather than a single instrument.
+  inspection: (
+    <>
+      <path
+        d="M12 10h6V7h12v3h6v31H12z"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M18 10h12" strokeLinecap="round" />
+      <circle cx="26" cy="26" r="6" />
+      <path d="M30.5 30.5 36 36" strokeLinecap="round" />
+    </>
+  ),
   eddyCurrent: (
     <>
       <circle cx="24" cy="24" r="14" />

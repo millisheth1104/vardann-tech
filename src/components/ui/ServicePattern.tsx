@@ -140,9 +140,9 @@ function TrainingMotif() {
 const PATTERNS: Record<string, () => ReactElement> = {
   "advanced-ndt": WaveMotif,
   "conventional-ndt": GridMotif,
-  "inspection-services": CrosshairMotif,
-  metallography: MicrostructureMotif,
-  "precision-manufacturing": MachiningMotif,
+  "specialized-inspection": CrosshairMotif,
+  "metallography-material-analysis": MicrostructureMotif,
+  manufacturing: MachiningMotif,
   "training-certification": TrainingMotif,
 };
 

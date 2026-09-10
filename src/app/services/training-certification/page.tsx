@@ -10,7 +10,7 @@ const meta = serviceMeta.find((s) => s.id === "training-certification")!;
 export const metadata: Metadata = {
   title: "Training & Certification | Vardann Tech and Engg LLP",
   description:
-    "ASNT-aligned NDT Level I, II and III training and certification — theory with hands-on practical sessions across PAUT, TOFD, ECT, RFET, IRIS, UT, MT and PT methods.",
+    "NDT Level I, II and III training and in-house certification aligned with applicable ASNT recommended practices — theory with hands-on practical sessions across PAUT, TOFD, ECT, RFT, IRIS, UT, MPT and LPT methods.",
 };
 
 export default function TrainingCertificationPage() {

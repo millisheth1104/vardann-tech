@@ -16,38 +16,42 @@ export type TimelineStep = {
   description: string;
 };
 
+// The actual company timeline, per the approved short website version in
+// the client's correction document. The previous entries had incorrect
+// dates (rebranding was 2025, not 2023) and an unverified founding
+// location.
 export const timelineSteps: TimelineStep[] = [
   {
     number: "01",
     year: "2019",
-    title: "Foundation & Core NDT Excellence",
-    subtitle: "ESTABLISHED IN VADODARA, GUJARAT",
+    title: "Foundation & NDT Services",
+    subtitle: "ADVANCED NDT SERVICES LLP",
     description:
-      "Founded as Advanced NDT Services LLP with a singular commitment: delivering ethical engineering practices and uncompromising quality across industrial inspections.",
+      "Established as ADVANCED NDT SERVICES LLP, delivering reliable NDT and industrial inspection services.",
   },
   {
     number: "02",
-    year: "2021",
-    title: "Advanced Ultrasonic & Eddy Current Expansion",
-    subtitle: "TECHNOLOGY SCALING",
+    year: "2019–2024",
+    title: "Technical Capability Expansion",
+    subtitle: "ADVANCED & CONVENTIONAL NDT",
     description:
-      "Expanded specialized capabilities to include Phased Array (PAUT), Time of Flight Diffraction (TOFD), and Remote Field / Eddy Current Tube Inspection.",
+      "Expanded into advanced NDT, conventional NDT, metallography, material verification and third-party inspection.",
   },
   {
     number: "03",
-    year: "2023",
-    title: "Rebranding & Precision Manufacturing Facility",
-    subtitle: "LLP STRUCTURAL GROWTH",
+    year: "2025",
+    title: "VARDANN TECH AND ENGG LLP",
+    subtitle: "REBRANDING & BROADER VISION",
     description:
-      "Rebranded as Vardann Tech and Engg LLP. Established our dedicated precision CNC & EDM manufacturing unit for ASME/NABL compliant calibration standards.",
+      "Rebranded to reflect a broader vision encompassing inspection, precision manufacturing and engineered NDT products.",
   },
   {
     number: "04",
-    year: "2025",
-    title: "Global Supply & Multi-Region Footprint",
-    subtitle: "GLOBAL REACH",
+    year: "2025–2026",
+    title: "Manufacturing & Global Growth",
+    subtitle: "PRODUCTS & SUPPLY FOOTPRINT",
     description:
-      "Extending engineering supply chains and third-party QA/QC surveillance across India, the Middle East, Africa, and the Asia-Pacific region.",
+      "Expanded the manufacture of calibration tubes, probes, test blocks, welded specimens and customized engineering products while strengthening supply across international markets.",
   },
 ];
 

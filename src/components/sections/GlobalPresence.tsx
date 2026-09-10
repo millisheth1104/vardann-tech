@@ -11,13 +11,13 @@ export default function GlobalPresence() {
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-8 sm:px-6">
       <div className="relative mx-auto w-full max-w-6xl">
         <SectionHeading
-          eyebrow="Global Presence"
+          eyebrow="Global Supply Footprint"
           title={
             <>
-              Trusted Across <span className="text-vblue italic">Continents.</span>
+              Supplying Across <span className="text-vblue italic">Continents.</span>
             </>
           }
-          subtitle="Our products and services are trusted by clients across India, the Middle East, Africa and the Asia-Pacific region."
+          subtitle="We have supplied clients across the Middle East, Africa and the Asia-Pacific region from our base in Mumbai, India."
         />
 
         {/* Spans the full container. The map's own 2.42:1 panoramic crop
@@ -31,7 +31,7 @@ export default function GlobalPresence() {
 
         <div className="mx-auto mt-5 flex max-w-3xl flex-col items-center gap-2.5 text-center">
           <p className="text-eyebrow text-[0.65rem] text-steel">
-            Global Delivery Network &amp; Connected Markets
+            Countries Supplied From Mumbai, India
           </p>
           <div className="flex flex-wrap items-center justify-center gap-2">
             {allPresenceCountries.map((c) => (

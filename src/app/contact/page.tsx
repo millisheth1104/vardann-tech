@@ -12,7 +12,11 @@ export default function ContactPage() {
     <div className="bg-continuous-light">
       <PageHeader
         eyebrow="Contact Us"
-        title="Let's Engineer What's Next."
+        title={
+          <>
+            Let&rsquo;s Engineer <span className="text-vblue italic">What&rsquo;s Next.</span>
+          </>
+        }
         subtitle="Talk to our team about your inspection, testing or manufacturing requirements."
       />
 

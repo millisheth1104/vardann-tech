@@ -8,7 +8,7 @@ import TextReveal from "@/components/services/TextReveal";
 export const metadata: Metadata = {
   title: "Services | Vardann Tech and Engg LLP",
   description:
-    "Advanced NDT, conventional NDT, destructive testing, ASNT-aligned training & certification, and precision manufacturing — engineering inspection and fabrication services from Vardann Tech and Engg LLP.",
+    "Advanced NDT, conventional NDT, specialized and third-party inspection, metallography and material analysis, NDT training and certification, and precision manufacturing — engineering inspection and fabrication services from Vardann Tech and Engg LLP.",
 };
 
 export default function ServicesPage() {
@@ -26,10 +26,10 @@ export default function ServicesPage() {
             <TextReveal text="precision." delay={0.25} className="text-vblue italic" />
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-body sm:text-lg">
-            Vardann Tech combines advanced NDT, conventional NDT, destructive
-            testing, metallurgical analysis, training, and precision
-            manufacturing — under one roof, to one standard, for every
-            project we take on.
+            Vardann Tech combines advanced NDT, conventional NDT,
+            third-party inspection, metallography and material analysis,
+            training, and precision manufacturing — under one roof, to one
+            standard, for every project we take on.
           </p>
         </div>
       </section>

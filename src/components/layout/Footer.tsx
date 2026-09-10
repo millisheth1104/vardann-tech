@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <Logo />
             <p className="mt-5 max-w-sm text-base leading-relaxed text-white/60">
-              {company.about}
+              {company.footerDescription}
             </p>
             <p className="text-eyebrow mt-5 text-[0.65rem] text-gold">
               Formerly known as {company.formerlyKnownAs}

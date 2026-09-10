@@ -33,8 +33,7 @@ export default function Hero() {
           Engineered for <span className="text-vblue italic">the Critical.</span>
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-body sm:text-lg">
-          {company.about} Trusted across India, the Middle East, Africa and
-          Asia-Pacific since {company.established}.
+          {company.homeIntro}
         </p>
 
         <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
