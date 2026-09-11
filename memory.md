@@ -407,3 +407,27 @@ learns nothing — that's intentional, not a bug.
 Still open: the Privacy Policy. The consent sentence is on the form but
 unlinked, because the policy text has to come from the client — do not draft
 legal text for them.
+
+## Product image sources (2026-09-11)
+
+Two sources, both the client's own — never stock photography:
+1. `IMAGES-20260831T183334Z-1-001/IMAGES/` — supplied photo set.
+2. `FINAL-COMPANY CATALOUGE.docx` → `word/media/image*.png`. Extract with
+   zipfile; the inline ones can be mapped to captions by walking
+   `word/document.xml` for `<w:t>` runs and `r:embed` attributes in order.
+   Many are floating/anchored and won't appear in that walk — images 28-50
+   are the ultrasonic test blocks, 5-16 the tubes/probes/wedges.
+
+**Always view an image before wiring it.** Filenames lie: `ect-rft-probes.png`
+was a photo of AWS *angle beam* probes, and shipped under the wrong product
+name until it was actually looked at. The catalogue images have engraved
+block names ("V1/5 (A2) Test Block", "DSC TEST BLOCK") which is the reliable
+way to identify them.
+
+Block standards (ISO 2400, BS 2704, ASTM E164, AWS 6.16.1B etc.) come from
+the catalogue's own "Block Type / Standard / Material Option" spec lines —
+don't invent standards for a block.
+
+Note: V2 **is** the IIW Type 2 block. The correction list bullets them
+separately; one card named "V2 / IIW Type 2 Test Block" covers both rather
+than duplicating a product.

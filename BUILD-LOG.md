@@ -104,3 +104,28 @@ returns 422 with per-field messages. `npm run build` clean.
 **Still outstanding:** the Privacy Policy page. The consent sentence is on
 the form, but it is not yet linked - the policy text has to come from the
 client rather than be invented for them.
+
+## 2026-09-11 (later) - Products audited against both §9 lists
+
+42 products (was 39). Audited card by card against the required categories
+and the calibration block range.
+
+**Three real gaps, now filled:** ECT/RFET/NFT Probes, Custom Pipe Blocks,
+30 FBH Resolution Block.
+
+**Three mislabels, now corrected:**
+- "ECT / RFT Probes" was showing AWS angle beam ultrasonic probes → renamed
+  "Angle Beam Probes" and moved to Probe Accessories; the tube-probe range
+  got its own card with the catalogue's own probe photo.
+- "V1 Calibration Block" → "V1/5 (A2) Test Block"
+- "V2 Calibration Block" → "V2 / IIW Type 2 Test Block" (V2 *is* the IIW
+  Type 2 block — one card covers both bullets rather than inventing a second
+  product and photo for the same object)
+- "Probe Wedges & Membranes" → "Membranes & Probe Shoes"
+
+**Specs upgraded** from bare material to the standards printed in the
+catalogue: ISO 2400 · BS 2704 / ISO 2400-1972E · ASTM E164 / BS 2704 · ISO
+7963 / ASTM E164 · BRR-AWS X-1 / ASTM E164 · AWS 6.16.1B, each with CS ·
+MS · SS · AL material options.
+
+Coverage now: all 12 required categories and all 9 calibration blocks.
