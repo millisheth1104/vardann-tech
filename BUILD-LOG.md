@@ -67,3 +67,40 @@ the filename never decided the mapping.
   privacy consent) are all still outstanding.
 - Owner names on the About page remain flagged placeholders in `content.ts`.
 - The fal.ai key pasted into chat earlier still needs rotating.
+
+
+## 2026-09-11 - Advanced NDT wording, Conventional NDT UT/UTG, contact page
+
+- **Advanced NDT** - the approved RFT wording had been applied to
+  `content.ts` but landed in fragments: "carbon-steel and ferritic-alloy
+  tubes" was in `advantages`, which `MethodSection` renders as gold benefit
+  pills, so a material scope read as a claim. Moved into the description.
+  IRIS and PECT reworded to the approved sentences. The hero code strip and
+  homepage capability tags listed 7 of the 9 documented methods - PECT and
+  RVI added.
+- **Conventional NDT** - the page intro still described UT and UTG as one
+  method. Split per the approved text; UT and UTG method rows reworded to
+  match.
+- **§12 Contact details** - address, both emails, all three numbers, website
+  and both social handles added to `content.ts` as `contactDetails`, every
+  one rendered as a link (`tel:` in E.164, `mailto:`, Maps, real profile
+  URLs). Verified all 9 links in-browser.
+- **§13 Contact form** - visible label per field, name/email/message
+  required, `type=email`, real `name` attributes, inline validation, success
+  state, consent checkbox with the client's wording enforced client- and
+  server-side. Spam protection is an off-screen honeypot + 2.5s minimum fill
+  time + 5-per-10-minute per-IP throttle.
+- **`POST /api/contact`** delivers to info@ and admin@ through Resend over
+  plain `fetch` (no new dependency). Set `RESEND_API_KEY` and
+  `CONTACT_FROM_EMAIL` to switch delivery on - see `.env.example`. Until
+  then the route returns 503 and the form shows the visitor a prefilled
+  `mailto:` rather than pretending to have sent.
+
+**Verified in-browser:** empty submit surfaces all four required-field
+errors; a complete submit POSTs and returns 503 with the mailto fallback
+(expected without a key); honeypot returns 200 and sends nothing; bad input
+returns 422 with per-field messages. `npm run build` clean.
+
+**Still outstanding:** the Privacy Policy page. The consent sentence is on
+the form, but it is not yet linked - the policy text has to come from the
+client rather than be invented for them.

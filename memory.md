@@ -383,3 +383,27 @@ Products now deep-link: homepage bestseller cards point at
 `/products#<product-id>`, and `ProductGrid` opens that product's modal from
 the hash. Each modal has a per-product `mailto:` enquiry link built from
 `company.email`.
+
+## Contact page (2026-09-11)
+
+§12 and §13 are now done — the earlier "dont do anything for contact page"
+instruction was lifted when the user said "make a contact page".
+
+Contact details live in `contactDetails` in `content.ts`, not hardcoded in
+the page. Phone hrefs are E.164 (`tel:+919664050993`) while `display` keeps
+the brochure's spacing — keep both fields if you add a number.
+
+`POST /api/contact` sends via **Resend over plain `fetch`** — deliberately no
+SDK dependency. It needs `RESEND_API_KEY` plus `CONTACT_FROM_EMAIL` on a
+domain verified with Resend. **Without the key the route returns 503 on
+purpose** and the form shows a prefilled `mailto:` — don't "fix" that by
+making it fake a success. Recipients are info@ and admin@vardanntech.com.
+
+Spam protection is three layers: an off-screen honeypot named `website`, a
+2.5s minimum fill time (`renderedAt` from the client), and a 5-per-10-minute
+per-IP throttle. The honeypot and fill-time checks return **200** so a bot
+learns nothing — that's intentional, not a bug.
+
+Still open: the Privacy Policy. The consent sentence is on the form but
+unlinked, because the policy text has to come from the client — do not draft
+legal text for them.
