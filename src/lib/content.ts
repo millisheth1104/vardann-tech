@@ -7,6 +7,7 @@ export const company = {
   tagline: "Powering Precision Globally",
   established: 2019,
   website: "www.vardanntech.com",
+  websiteUrl: "https://www.vardanntech.com",
   /** Used by the per-product enquiry links on the Products page. */
   email: "info@vardanntech.com",
   social: "@vardanntech",
@@ -30,6 +31,37 @@ export const company = {
     "To establish VARDANN TECH as a global symbol of precision, innovation, integrity, and trust in NDT and metallurgical engineering.",
   mission:
     "To innovate with purpose, engineer with precision, and deliver with uncompromising integrity while creating reliable solutions that exceed customer expectations.",
+};
+
+/** Approved contact details, taken verbatim from the company profile.
+ *  Every entry carries the href the UI should link to — the correction list
+ *  asks for all numbers, addresses, URLs and handles to be clickable. */
+export const contactDetails = {
+  address: {
+    lines: [
+      "G-32, Saidham Shopping Plaza, P.K. Road,",
+      "Saidham, Mulund West,",
+      "Mumbai – 400080, Maharashtra, India.",
+    ],
+    mapsUrl:
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(
+        "G-32, Saidham Shopping Plaza, P.K. Road, Saidham, Mulund West, Mumbai 400080, Maharashtra, India",
+      ),
+  },
+  emails: [
+    { display: "info@vardanntech.com", href: "mailto:info@vardanntech.com" },
+    { display: "admin@vardanntech.com", href: "mailto:admin@vardanntech.com" },
+  ],
+  phones: [
+    { label: "Mobile", display: "+91 96640 50993", href: "tel:+919664050993" },
+    { label: "Telephone", display: "+91 22 3572 4058", href: "tel:+912235724058" },
+    { label: "Office Mobile", display: "+91 96196 36917", href: "tel:+919619636917" },
+  ],
+  social: [
+    { label: "Instagram", display: "@vardanntech", href: "https://www.instagram.com/vardanntech" },
+    { label: "YouTube", display: "@vardanntech", href: "https://www.youtube.com/@vardanntech" },
+  ],
 };
 
 export const navLinks = [
@@ -772,7 +804,7 @@ export const serviceMeta: ServiceMeta[] = [
     headline: "Proven inspection. Precise decisions.",
     subtitle: "Field-Proven Flaw Detection & Material Verification",
     intro:
-      "Ultrasonic Testing uses high-frequency sound waves to determine part thickness and detect internal or surface flaws in base materials and welds — real-time, accurate results that reduce costly downtime.",
+      "Ultrasonic Testing uses high-frequency sound waves to detect and evaluate internal and surface-connected discontinuities in materials and welds, while Ultrasonic Thickness Gauging measures the remaining wall thickness of pipes, tanks, tubes and components from one accessible surface.",
     cardDescriptor: "Field-proven flaw detection & material verification",
     heroVisualLabel: "UT thickness gauging on a pressure line",
     heroImage: "/services/conventional-ndt-hero.jpg",
@@ -969,9 +1001,9 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
       {
         code: "UT",
         name: "Ultrasonic Testing",
-        scope: "Base materials & welds",
+        scope: "Materials & welds",
         points: [
-          "High-frequency sound waves detect internal and surface flaws",
+          "High-frequency sound waves detect and evaluate internal and surface-connected discontinuities",
         ],
         advantages: ["Single-sided access", "Immediate results"],
         icon: "ultrasonic",
@@ -983,10 +1015,9 @@ export const conventionalNdtGroups: ServiceMethodGroup[] = [
         name: "Ultrasonic Thickness Gauging",
         scope: "Pipes, vessels, tanks, structural steel",
         points: [
-          "Measures remaining wall thickness",
-          "Quantifies corrosion and erosion loss",
+          "Measures the remaining wall thickness of pipes, tanks, tubes and components",
         ],
-        advantages: ["Single-sided access", "Immediate results"],
+        advantages: ["Reads from one accessible surface", "Immediate results"],
         icon: "ultrasonic",
       },
       {
