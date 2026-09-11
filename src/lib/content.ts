@@ -335,10 +335,24 @@ export const bestsellerProducts: Product[] = [
     category: "Tube Inspection",
     name: "Calibration Tubes",
     description:
-      "Precision-machined tubular reference standards with machined defects for probe and procedure qualification across ECT, RFT, NFT, IRIS, ECA and MFL.",
-    spec: "30+ materials · custom defect type, size and location",
+      "Precision-machined tubular reference standards with machined defects for probe and procedure qualification across ECT, RFT, NFT, IRIS, ECA and MFL. Mock-up exchangers and tube bundles are built to order for training and technique validation.",
+    spec: "30+ materials · milled, turned or EDM machined · custom orders typically ship in 3–6 days",
     icon: "calibrationTube",
     image: "/products/calibration-tubes.png",
+  },
+  {
+    // The catalogue's "ECT & RFET PROBES" page: straight and flexible tube
+    // probes. The card that used to be called "ECT / RFT Probes" was showing
+    // AWS angle beam probes, so this is the first time the site actually
+    // pictures the tube-probe range.
+    id: "ect-rfet-nft-probes",
+    category: "Tube Inspection",
+    name: "ECT / RFET / NFT Probes",
+    description:
+      "Straight and flexible ECT, RFT and NFT tube probes supplied with TUD cables, compatible with the leading NDT instruments for field and laboratory tube inspection.",
+    spec: "Straight and flexible bodies · TUD cables",
+    icon: "probe",
+    image: "/products/ect-rfet-nft-probes.png",
   },
   {
     id: "customised-ut-probes",
@@ -386,7 +400,7 @@ export const bestsellerProducts: Product[] = [
     name: "NAVSHIPS Test Block",
     description:
       "Multi-hole ultrasonic reference block for sensitivity and resolution checks to the NAVSHIPS specification.",
-    spec: "AISI 1018 steel",
+    spec: "AISI 1018 steel · metric and imperial",
     icon: "testBlock",
     image: "/products/navships-test-block.png",
   },
@@ -396,7 +410,7 @@ export const bestsellerProducts: Product[] = [
     name: "DC Test Block",
     description:
       "Distance-calibration block for angle beam probe index and refracted-angle verification.",
-    spec: "AISI 1018 steel",
+    spec: "ASTM E164 · BRR/AWS X-1 — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/dc-test-block.png",
   },
@@ -406,9 +420,29 @@ export const bestsellerProducts: Product[] = [
     name: "DSC Test Block",
     description:
       "Distance and sensitivity calibration block with engraved angle scale for shear-wave probe setup.",
-    spec: "AISI 1018 steel",
+    spec: "ASTM E164 · AWS 6.16.1B — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/dsc-test-block.png",
+  },
+  {
+    id: "fbh-30-resolution-block",
+    category: "Calibration Standards",
+    name: "30 FBH Resolution Block",
+    description:
+      "Thirty flat-bottom holes from 0.050 in. to 1.250 in. depth across eight rows, for checking the depth resolution of straight-beam ultrasonic setups.",
+    spec: "1018 steel · metric and imperial",
+    icon: "testBlock",
+    image: "/products/fbh-30-resolution-block.png",
+  },
+  {
+    id: "custom-pipe-blocks",
+    category: "Calibration Standards",
+    name: "Custom Pipe Blocks",
+    description:
+      "Pipe-section and welded plate calibration blocks machined to the curvature, wall thickness and reflector set a specific procedure calls for.",
+    spec: "Chrome-nickel alloy, aluminium, cast iron, refractory alloy and more",
+    icon: "testBlock",
+    image: "/products/custom-pipe-blocks.png",
   },
   {
     id: "mpi-test-block",
@@ -491,14 +525,14 @@ export const bestsellerProducts: Product[] = [
     image: "/products/welded-specimen-set.png",
   },
   {
-    id: "ect-rft-probes",
-    category: "Tube Inspection",
-    name: "ECT / RFT Probes",
+    id: "angle-beam-probes",
+    category: "Probe Accessories",
+    name: "Angle Beam Probes",
     description:
       "Precision-machined tubular inspection probes with gold-plated connectors, built for consistent, repeatable readings.",
     spec: "Manufactured per ASME standards — custom orders ship in 3–6 days",
     icon: "probe",
-    image: "/products/ect-rft-probes.png",
+    image: "/products/angle-beam-probes.png",
   },
   {
     id: "calibration-step-block-a",
@@ -526,27 +560,27 @@ export const bestsellerProducts: Product[] = [
     name: "IIW Type 1 Calibration Block",
     description:
       "Precision-machined 1018 carbon steel reference block with an angle-beam scale, radius, and reference holes for probe calibration and sensitivity checks.",
-    spec: "1018 Carbon Steel — CNC/EDM machined to IIW tolerances",
+    spec: "ISO 2400-1972E · ASTM E164 — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/iiw-type1-block.png",
   },
   {
     id: "v1-calibration-block",
     category: "Calibration Standards",
-    name: "V1 Calibration Block",
+    name: "V1/5 (A2) Test Block",
     description:
       "IIW-style V1 reference block with a graduated angle scale and reference hole, used to verify probe index point, beam angle, and resolution.",
-    spec: "V1/5 (A2) type test block",
+    spec: "ISO 2400 · BS 2704 — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/v1-calibration-block.png",
   },
   {
     id: "v2-calibration-block",
     category: "Calibration Standards",
-    name: "V2 Calibration Block",
+    name: "V2 / IIW Type 2 Test Block",
     description:
       "Compact V2-style calibration block in 1018 steel with a graduated angle scale from 35° to 85°, used for angle-probe verification in confined-access areas.",
-    spec: "V2/12.5mm — 1018 Steel",
+    spec: "BS 2704 · ISO 7963 — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/v2-calibration-block.png",
   },
@@ -693,7 +727,7 @@ export const bestsellerProducts: Product[] = [
   {
     id: "probe-membranes",
     category: "Accessories",
-    name: "Probe Wedges & Membranes",
+    name: "Membranes & Probe Shoes",
     description:
       "Set of couplant membranes and contact wedges in round and rectangular profiles, used with immersion and wheel-probe scanning setups.",
     spec: "Custom sizes available on request",
