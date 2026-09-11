@@ -1,29 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Lato, Poppins } from "next/font/google";
+import { Lato, Poppins, Russo_One } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/layout/Preloader";
 import BrochureFloatingButton from "@/components/layout/BrochureFloatingButton";
 import "./globals.css";
 
-// Typography system: DM Serif Display for headings, Lato for
-// sub-headings/eyebrow labels, Poppins for body copy. Mapped to
-// --font-display / --font-heading / --font-sans in globals.css.
-//
-// The italic is loaded deliberately, not for completeness: the site's
-// headings are two-tone, with the accent word set italic in engineering
-// blue ("Company <em>Profile.</em>"). Russo One, which this replaced, had
-// no italic at all, so that accent was a browser-synthesized slant on
-// every page. This face ships a drawn italic.
-//
-// One 400 weight, like Russo One before it — `font-bold` on a display
-// heading would be synthesized, which `.font-display` in globals.css
-// blocks.
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-dm-serif-display",
+// Typography system: Russo One for headings (the same face as the logo's
+// "VARDANN" wordmark), Lato for sub-headings/eyebrow labels, Poppins for
+// body copy. Mapped to --font-display / --font-heading / --font-sans in
+// globals.css. Russo One ships a single 400 weight and no italic, so
+// `font-bold`/`italic` on a display heading is browser-synthesized.
+const russoOne = Russo_One({
+  variable: "--font-russo-one",
   subsets: ["latin"],
   weight: ["400"],
-  style: ["normal", "italic"],
 });
 
 const lato = Lato({
@@ -50,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${dmSerifDisplay.variable} ${lato.variable} ${poppins.variable} h-full antialiased`}
+      className={`${russoOne.variable} ${lato.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <Preloader />
