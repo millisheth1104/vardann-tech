@@ -428,6 +428,8 @@ Block standards (ISO 2400, BS 2704, ASTM E164, AWS 6.16.1B etc.) come from
 the catalogue's own "Block Type / Standard / Material Option" spec lines —
 don't invent standards for a block.
 
-Note: V2 **is** the IIW Type 2 block. The correction list bullets them
-separately; one card named "V2 / IIW Type 2 Test Block" covers both rather
-than duplicating a product.
+Note: V2 **is** the IIW Type 2 block (BS 2704 A4 / ISO 7963), sold under
+both names. The user asked for them as two separate products, so there are
+two cards — `v2-calibration-block` and `iiw-type2-block` — carrying two
+different photographs of the same object. **That is deliberate, not an
+accidental duplicate**; don't merge them.

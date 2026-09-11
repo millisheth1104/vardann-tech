@@ -129,3 +129,11 @@ catalogue: ISO 2400 · BS 2704 / ISO 2400-1972E · ASTM E164 / BS 2704 · ISO
 MS · SS · AL material options.
 
 Coverage now: all 12 required categories and all 9 calibration blocks.
+
+### IIW Type 2 split out (same day)
+
+At the user's request "V2 / IIW Type 2 Test Block" became two cards — "V2
+Test Block" (BS 2704 · ISO 7963) and "IIW Type 2 Calibration Block" (ISO
+7963 · BS 2704 A4). Same physical block under both trade names, so each
+card uses a different photograph of it from the client's set rather than the
+same image twice. 43 products.
