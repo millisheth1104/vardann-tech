@@ -9,7 +9,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
   --font-heading: var(--font-lato);
-  --font-display: var(--font-russo-one);
+  --font-display: var(--font-dm-serif-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -190,17 +190,17 @@
   }
 }
 
-/* Russo One (--font-display) ships a single 400 weight and no italic, and
-   it's a heavy geometric face — at the tight negative tracking the display
-   headings were using, it crowded and read much heavier than the previous
-   serif did. Pinning weight to 400 blocks browser-synthesized bold, and
-   easing the tracking back toward neutral lightens the headings without
-   touching every call site. Deliberately unlayered so it wins over the
-   `tracking-*` / `font-bold` utilities (layered styles lose to unlayered
-   ones at equal specificity). */
+/* DM Serif Display (--font-display) ships a single 400 weight, so pinning
+   the weight here blocks browser-synthesized bold from a stray
+   `font-bold`. The slight negative tracking tightens the wide default
+   sidebearings at heading sizes. Note this rule must NOT set
+   `font-style` — the accent word in every two-tone heading relies on the
+   real italic. Deliberately unlayered so it wins over the `tracking-*` /
+   `font-bold` utilities (layered styles lose to unlayered ones at equal
+   specificity). */
 .font-display {
   font-weight: 400;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.012em;
 }
 
 /* Global-presence map entrance. Pure CSS keyframes driven by a single
