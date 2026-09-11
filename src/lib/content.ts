@@ -151,7 +151,7 @@ export const capabilities: Capability[] = [
     id: "advanced-ndt",
     number: "01",
     title: "Advanced NDT",
-    subtitle: "ECT / RFT / IRIS / NFT / PAUT / TOFD / LRUT",
+    subtitle: "ECT / RFT / IRIS / NFT / PAUT / TOFD / LRUT / PECT / RVI",
     description:
       "Advanced non-destructive testing methods designed for accurate inspection, defect detection and condition assessment.",
     icon: "eddyCurrent",
@@ -749,7 +749,7 @@ export const serviceMeta: ServiceMeta[] = [
     number: "01",
     slug: "advanced-ndt",
     title: "Advanced NDT",
-    eyebrow: "ECT · RFT · IRIS · NFT · PAUT · TOFD · LRUT",
+    eyebrow: "ECT · RFT · IRIS · NFT · PAUT · TOFD · LRUT · PECT · RVI",
     headline: "Seeing what conventional inspection cannot.",
     subtitle:
       "Tube & Tubular Inspection · Advanced Ultrasonic Inspection · Pipeline Inspection",
@@ -877,10 +877,11 @@ export const advancedNdtGroups: ServiceMethodGroup[] = [
         code: "RFT",
         name: "Remote Field Testing",
         scope: "Ferrous tubing",
-        // The previous "up to 12mm" figure was removed per the client's
-        // correction: it isn't verified for a specific probe range.
-        points: ["Detects and assesses wall thinning and corrosion"],
-        advantages: ["Carbon-steel tubes", "Ferritic-alloy tubes"],
+        // Approved description. The earlier "up to 12mm" figure is gone: the
+        // client could not verify it for a specific equipment and probe range.
+        points: [
+          "Detects and assesses wall thinning and corrosion in carbon-steel and ferritic-alloy tubes",
+        ],
         icon: "probe",
       },
       {
@@ -888,10 +889,10 @@ export const advancedNdtGroups: ServiceMethodGroup[] = [
         name: "Internal Rotary Inspection System",
         scope: "All tube materials",
         points: [
-          "Precision ultrasonic measurement of remaining wall thickness",
+          "Precision ultrasonic technique measuring remaining wall thickness",
           "Identifies corrosion or erosion",
         ],
-        advantages: ["Detailed B-scan imaging", "Detailed C-scan imaging"],
+        advantages: ["Detailed B-scan and C-scan imaging"],
         icon: "ultrasonic",
       },
       {
@@ -944,7 +945,7 @@ export const advancedNdtGroups: ServiceMethodGroup[] = [
         points: [
           "Measures wall thickness through insulation, coatings or marine growth",
         ],
-        advantages: ["Particularly suited to corrosion-under-insulation inspection"],
+        advantages: ["Suited to corrosion-under-insulation inspection"],
         icon: "eddyCurrent",
       },
       {
