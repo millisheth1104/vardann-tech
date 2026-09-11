@@ -137,3 +137,19 @@ Test Block" (BS 2704 · ISO 7963) and "IIW Type 2 Calibration Block" (ISO
 7963 · BS 2704 A4). Same physical block under both trade names, so each
 card uses a different photograph of it from the client's set rather than the
 same image twice. 43 products.
+
+## 2026-09-11 - Display face changed to DM Serif Display
+
+Built a five-way type proof on real Vardann headings (Instrument Serif, DM
+Serif Display, Libre Bodoni, Italiana, Cormorant Infant) at the site's own
+sizes and brand colours, on both the paper and navy grounds:
+https://claude.ai/code/artifact/e25630f0-8e78-4797-bffa-c62e1a92e525
+
+User picked DM Serif Display. Swapped in `layout.tsx` and `globals.css`;
+Lato and Poppins unchanged. Italic loaded alongside roman - the deciding
+factor, since the two-tone heading accent was a synthesized slant under
+Russo One. Tracking -0.005em -> -0.012em; weight still pinned at 400.
+
+Verified in-browser at hero, section and service-headline sizes on both
+grounds, including the four-line "Seeing what conventional inspection
+cannot." `npm run build` clean.

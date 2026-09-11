@@ -433,3 +433,29 @@ both names. The user asked for them as two separate products, so there are
 two cards — `v2-calibration-block` and `iiw-type2-block` — carrying two
 different photographs of the same object. **That is deliberate, not an
 accidental duplicate**; don't merge them.
+
+
+## Typography (2026-09-11)
+
+**DM Serif Display** (headings) / **Lato** (sub-headings, eyebrow labels) /
+**Poppins** (body), mapped to `--font-display` / `--font-heading` /
+`--font-sans`. Replaced Russo One after a five-way proof
+(https://claude.ai/code/artifact/e25630f0-8e78-4797-bffa-c62e1a92e525 —
+Instrument Serif, DM Serif Display, Libre Bodoni, Italiana, Cormorant
+Infant, set on real Vardann headings).
+
+**Why this face won:** every heading is two-tone, with the accent word
+italic in engineering blue (`Company <em>Profile.</em>`). A face with no
+drawn italic makes that a browser-synthesized slant on every page — which
+is what Russo One was doing, and why Italiana was ruled out.
+
+Two things about `.font-display` in globals.css:
+- It pins `font-weight: 400` because the face has one weight, so
+  `font-bold` would be synthesized. It is **deliberately unlayered** so it
+  beats the `tracking-*` / `font-bold` utilities.
+- It must **never set `font-style`** — that would kill the accent italic.
+
+Tracking is `-0.012em` (was `-0.005em` for Russo One) to tighten this
+face's wider sidebearings at heading sizes.
+
+The logo is a PNG, so the wordmark doesn't follow the display face.
