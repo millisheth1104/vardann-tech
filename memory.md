@@ -459,3 +459,25 @@ Tracking is `-0.012em` (was `-0.005em` for Russo One) to tighten this
 face's wider sidebearings at heading sizes.
 
 The logo is a PNG, so the wordmark doesn't follow the display face.
+
+
+## Vercel (2026-09-11)
+
+Project is **milli2/vardann-tech**, connected to the GitHub repo, so every
+push to `main` auto-deploys to production. No `.vercel` dir locally and the
+CLI is **logged out** — `vercel login` is needed before any CLI deploy.
+
+- Production, public: **https://vardann-tech.vercel.app**
+- Branch previews get `vardann-tech-git-<branch>-milli2.vercel.app`
+
+**Preview deployments are behind Vercel Authentication.** A preview URL
+302s to `vercel.com/sso-api`, so it is NOT shareable with a client until
+Deployment Protection is turned off for Preview (or a protection-bypass
+secret is used). Production is unprotected. Check this before promising
+anyone a preview link — `curl -I` the URL and look for the 302; following
+redirects with `curl -L` returns 200 from the *login page* and hides the
+problem.
+
+Branch `font/russo-one` exists only to show the client the old display face
+side by side with production. It reverts the font swap and nothing else.
+**Do not merge it** — delete it once the face is settled.

@@ -153,3 +153,19 @@ Russo One. Tracking -0.005em -> -0.012em; weight still pinned at 400.
 Verified in-browser at hero, section and service-headline sizes on both
 grounds, including the four-line "Seeing what conventional inspection
 cannot." `npm run build` clean.
+
+## 2026-09-11 - Two deployments for the font decision
+
+Production already runs DM Serif Display (commit 9dcdb1a, verified by
+fetching the deployed CSS): https://vardann-tech.vercel.app
+
+Pushed branch `font/russo-one` (5937099), which reverts only the font swap
+in 532ff4c. Vercel built its preview successfully:
+https://vardann-tech-git-font-russo-one-milli2.vercel.app
+
+**Blocker found:** that preview 302s to `vercel.com/sso-api` because
+Deployment Protection (Vercel Authentication) is enabled for Preview
+deployments, so it cannot be shared with the client as-is. Production is
+unprotected. Fix is a dashboard toggle: Project Settings -> Deployment
+Protection -> Vercel Authentication -> disable for Preview. No redeploy
+needed.
