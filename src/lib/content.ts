@@ -577,12 +577,27 @@ export const bestsellerProducts: Product[] = [
   {
     id: "v2-calibration-block",
     category: "Calibration Standards",
-    name: "V2 / IIW Type 2 Test Block",
+    name: "V2 Test Block",
     description:
-      "Compact V2-style calibration block in 1018 steel with a graduated angle scale from 35° to 85°, used for angle-probe verification in confined-access areas.",
+      "Compact 12.5mm V2 block in 1018 steel with a graduated 35°–85° angle scale, used to set probe index point, beam angle and range where access is tight.",
     spec: "BS 2704 · ISO 7963 — CS / MS / SS / AL",
     icon: "testBlock",
     image: "/products/v2-calibration-block.png",
+  },
+  {
+    // Listed as its own product at the client's request. Worth knowing for
+    // anyone editing this later: the IIW Type 2 and the V2 are the same
+    // physical block (BS 2704 A4 / ISO 7963), sold under both names, so the
+    // two cards carry different photographs of it rather than one image
+    // repeated — they are not an accidental duplicate.
+    id: "iiw-type2-block",
+    category: "Calibration Standards",
+    name: "IIW Type 2 Calibration Block",
+    description:
+      "The compact IIW Type 2 reference block, with 25mm and 50mm radii and an engraved angle scale, for probe index, refracted-angle and range calibration on thinner sections.",
+    spec: "ISO 7963 · BS 2704 (A4) — CS / MS / SS / AL",
+    icon: "testBlock",
+    image: "/products/iiw-type2-block.png",
   },
   {
     id: "clad-step-block",
